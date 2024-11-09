@@ -1,0 +1,8 @@
+"0","hemodialysis2 <- hemodialysis %>%"
+"0","  filter(!is.na(month))"
+"0","table1(~ hb + DOSE | month, data = hemodialysis2)"
+"2","Warning in table1.formula(~hb + DOSE | month, data = hemodialysis2) :"
+"2","
+ "
+"2"," Terms to the right of '|' in formula 'x' define table columns and are expected to be factors with meaningful labels.
+"

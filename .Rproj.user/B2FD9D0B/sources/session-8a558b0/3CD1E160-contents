@@ -1,0 +1,265 @@
+---
+title: "SR_Compare_Screening"
+author: "Trang Tu"
+date: "2024-01-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE, message = FALSE}
+if (!require("pacman", quietly = TRUE)) {
+  install.packages("pacman")
+}
+library(pacman)
+pacman::p_load(tidyverse,
+               ggplot2,
+               rio, #import, export
+               here,
+               readxl,
+               openxlsx,
+               panelr
+)
+```
+
+# Compare screening
+
+Merge 2 files from Trang and Sophie
+```{r warning=FALSE}
+record_SB <- import(here("Raw_Data", "asreview_dataset_SB_2024_04_26.xlsx"))
+record_TT <- import(here("Raw_Data", "asreview_dataset_TT_2024_04_12.csv"))
+```
+
+```{r}
+record_TT2 <- record_TT %>% select(record_id, title, exported_notes_1, included, asreview_ranking)
+
+record_compare <- merge(record_SB, record_TT2, by="record_id")
+
+colnames(record_compare)[34:39] <- gsub(x = colnames(record_compare)[34:39], pattern = ".x", replacement = "_SB")
+colnames(record_compare)[34:39] <- gsub(x = colnames(record_compare)[34:39], pattern = ".y", replacement = "_TT")
+```
+
+Compare results
+```{r}
+record_compare <- record_compare %>% 
+  mutate(consensus = if_else(included_SB - included_TT == 0, 1, 0)) %>%
+  rename(exported_notes_TT = "_SBported_notes_1" ) %>%
+  relocate(c(record_id, title.x, included_SB, included_TT, consensus, exported_notes_TT, title_TT, abstract)) %>%
+  arrange(desc(included_SB), desc(included_TT)) 
+list("Degree_of_consensus" = summary(as.factor(record_compare$consensus)))
+```
+
+Summary of results
+
+```{r}
+consensus <- record_compare %>% filter(consensus==1)
+
+list("Consesus record"= summary(as.factor(consensus$included_SB)))
+
+non_consensus <- record_compare %>% filter(consensus==0)
+
+one_person_SB <- record_compare %>% filter(!is.na(included_SB) & is.na(included_TT))
+one_person_TT <- record_compare %>% filter(!is.na(included_TT) & is.na(included_SB))
+
+list("Only SB rated" = nrow(one_person_SB), "Only TT rated" = nrow(one_person_TT))
+
+
+list("non_Consesus record_SB" =summary(as.factor(non_consensus$included_SB)))
+list("non_Consesus record_TT" =summary(as.factor(non_consensus$included_TT)))
+
+```
+
+```{r eval=FALSE}
+export(consensus, here("Processed_data", "consensus_screening_2024_04_29.xlsx"))
+
+export(non_consensus, here("Processed_data", "non_consensus_screening_2024_04_29.xlsx"))
+
+export(one_person_SB, here("Processed_data", "one_person_SB_2024_04_29.xlsx"))
+
+export(one_person_TT, here("Processed_data", "one_person_TT_2024_04_29.xlsx"))
+```
+
+Export subset of myocarditis studies
+
+```{r eval=FALSE}
+include <- consensus %>% filter(included.x == 1)
+myocarditis_record <- include %>% filter(grepl('Myocarditis|myocarditis', abstract))
+
+export(myocarditis_record, here("Processed_data", "myocarditis_record_2024_01_05.xlsx"))
+```
+
+## Files to reupload to ASReview
+
+```{r eval=FALSE}
+consensus_screening_to_merge <- read_excel(here("Processed_data", "consensus_screening_2024_06_26_to_merge.xlsx"))
+
+one_person_SB_TT_to_merge <- read_excel(here("Processed_data", "one_person_SB_TT_2024_06_26_to_merge.xlsx"))
+
+one_person_TT_SB_to_merge <- read_excel(here("Processed_data", "one_person_TT_SB_to_merge.xlsx"))
+one_person_TT_SB_to_merge <- one_person_TT_SB_to_merge %>% select(c(1:3))
+
+non_consensus_screening_merge <- read_excel(here("Processed_data","non_consensus_screening_2024_06_26_to_merge.xlsx"))
+
+complete_screening <- data.frame(rbind(consensus_screening_to_merge, one_person_SB_TT_to_merge, 
+                                       one_person_TT_SB_to_merge, non_consensus_screening_merge))
+
+```
+
+```{r eval=FALSE}
+complete_screening2 <- record_SB %>%
+  select(record_id,title,authors, doi)
+complete_screening3 <-merge(complete_screening2, complete_screening, by= "record_id", all.y = TRUE)
+
+included <- complete_screening3 %>% filter(included == "1") %>% select(-c("exported_notes", "included"))
+export(included, here("Processed_data", "included_papers_round1_2024_06_27.xlsx"))
+
+complete_screening4 <- record_SB %>%
+  select(-c("included", "asreview_ranking"))
+
+asreview_round2 <- merge(complete_screening4, complete_screening, by= "record_id", all.x = TRUE)
+export(asreview_round2, here("Processed_data", "asreview_round2.xlsx"))
+```
+
+## Round 2
+
+Merge 2 files from Trang and Sophie
+```{r warning=FALSE}
+record_SB <- import(here("Raw_Data", "asreview_Round2_Sophie.csv"))
+record_TT <- import(here("Raw_Data", "asreview_Round2_Trang.csv"))
+```
+
+
+```{r}
+record_TT2 <- record_TT %>% select(id, title, exported_notes_1, included, asreview_ranking)
+
+record_compare <- merge(record_SB, record_TT2, by="id")
+
+colnames(record_compare)[34:42] <- gsub(x = colnames(record_compare)[34:42], pattern = ".x", replacement = "_SB")
+colnames(record_compare)[34:42] <- gsub(x = colnames(record_compare)[34:42], pattern = ".y", replacement = "_TT")
+```
+
+Subset new records round 2
+
+```{r}
+asreview_round2_1 <- asreview_round2 %>% filter(!is.na(included))
+asreview_round2_1$id <- as.integer(asreview_round2_1$id)
+record_compare2 <- anti_join(record_compare, asreview_round2_1, by='id')
+```
+
+
+Compare results
+```{r}
+record_compare3 <- record_compare2 %>% 
+  filter(!is.na(included_SB) | !is.na(included_TT) ) %>%
+  mutate(consensus = if_else(included_SB - included_TT == 0, 1, 0)) %>%
+  rename(exported_notes_TT = "_SBported_notes_1_TT" ) %>%
+  relocate(c(record_id, title.x, included_SB, included_TT, consensus, exported_notes_TT, title_TT, abstract)) %>%
+  arrange(desc(included_SB), desc(included_TT)) 
+list("Degree_of_consensus" = summary(as.factor(record_compare2$consensus)))
+
+export(record_compare3, here("Processed_data", "addition_record_round2_2024_10_01.xlsx"))
+
+```
+
+Summary of results
+
+```{r}
+consensus <- record_compare %>% filter(consensus==1)
+
+list("Consesus record"= summary(as.factor(consensus$included_SB)))
+
+non_consensus <- record_compare %>% filter(consensus==0)
+
+one_person_SB <- record_compare %>% filter(!is.na(included_SB) & is.na(included_TT))
+one_person_TT <- record_compare %>% filter(!is.na(included_TT) & is.na(included_SB))
+
+list("Only SB rated" = nrow(one_person_SB), "Only TT rated" = nrow(one_person_TT))
+
+
+list("non_Consesus record_SB" =summary(as.factor(non_consensus$included_SB)))
+list("non_Consesus record_TT" =summary(as.factor(non_consensus$included_TT)))
+
+```
+
+
+# Compare ROBIN-I
+
+## Import data
+
+```{r}
+trang_robin <- read_excel(here("Raw_data", "Trang_Vaccine SR_Data extraction_2023-11-14.xlsx"), sheet ="ROBIN-I")
+sophie_robin <- read_excel(here("Raw_data", "Sophie_Vaccine SR_Data extraction_2024-06-07.xlsx"), sheet ="ROBIN-I")
+marloes_robin <- read_excel(here("Raw_data", "Marloes_Vaccine SR_Data extraction_2023-11-14.xlsx"), sheet ="ROBIN-I")
+
+double_check_robin <- read_excel(here("Raw_data", "ROBIN-I-Double-check.xlsx"), sheet ="ROBIN-I")
+```
+
+## Clean data
+```{r}
+clean_robin <- function(x){
+    x <- x %>%
+    dplyr::slice(-c(1:3)) %>%  #exclude old column names and explanations
+    select(-c("contrast_type":"other_covariate")) %>%
+    filter(!(study == "0" | is.na(study))) %>%
+    mutate(across(-1, tolower))
+  return(x)
+}
+```
+
+```{r}
+trang_robin_clean <- clean_robin(trang_robin)
+sophie_robin_clean <- clean_robin(sophie_robin)
+marloes_robin_clean <- clean_robin(marloes_robin)
+
+double_check_robin_clean <- clean_robin(double_check_robin)
+
+```
+
+Filter and merge files
+```{r}
+robin_cleaned <- rbind(trang_robin_clean, sophie_robin_clean, marloes_robin_clean)
+#robin_cleaned <- robin_cleaned  %>% mutate(across(where(is.character), as.factor)) %>% arrange(study)
+
+#double_check_robin_clean <- double_check_robin_clean %>% mutate(across(where(is.character), as.factor))
+
+#double_check_robin_clean <- double_check_robin_clean %>% filter(reviewer =="Sophie")
+```
+
+```{r}
+robin_merge <- merge(robin_cleaned, double_check_robin_clean, by = c("study", "study_design"), all.x = TRUE, all.y = TRUE)
+
+#robin_merge2 <- robin_merge %>% filter(! is.na(rob_overall.y))
+
+```
+
+## Compare assessment
+```{r}
+robin_merge <- robin_merge %>% 
+  mutate(confounding_compare = if_else(rob_confounding.x == rob_confounding.y, 1, 0),
+        selection_compare = if_else(rob_selection.x == rob_selection.y, 1, 0),
+        intervention_class_compare = if_else(rob_intervention_class.x == rob_intervention_class.y, 1, 0),
+        intervention_devi_compare = if_else(rob_intervention_deviation.x == rob_intervention_deviation.y, 1, 0),
+        missing_compare = if_else(rob_missing_data.x == rob_missing_data.y, 1, 0),
+        outcome_mesure_compare = if_else(rob_outcome_measure.x == rob_outcome_measure.y, 1, 0),
+        select_result_compare = if_else(rob_select_result.x == rob_select_result.y, 1, 0),
+        rob_overall_compare = if_else(rob_overall.x == rob_overall.y, 1, 0))
+
+
+```
+
+
+```{r}
+# Wide to long
+
+robin_merge_long <- long_panel(robin_merge, prefix = ".", label_location = "end",
+                               begin = "x", end = "y")
+```
+
+## Export excel
+
+```{r}
+export(robin_merge_long,  here("Processed_data","robin_merge_long_full.xlsx"))
+```
+

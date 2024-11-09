@@ -1,0 +1,63 @@
+---
+format:
+  revealjs:
+    theme: [simple, custom.scss]
+    transition: fade
+    transition-speed: fast
+    slide-number: true
+    height: 700
+    width: 1250
+    df-print: paged
+    chalkboard: true
+    code-fold: show
+execute: 
+  echo: false
+  warning: false
+  message: false
+editor: visual
+---
+
+##  {background-image="Figures/bg2.jpg" visibility="uncounted"}
+
+::: title
+**Hemoglobin Evolution In**
+
+**Hemodialysis Patients**
+:::
+
+::: author
+**Trang Tu - Luong Vuong - Neamin Berhe - Thanh Chuong Cao**
+:::
+
+::: date
+Longitudinal Data Analysis Project 1
+:::
+
+## Background
+
+::: columns
+::: {.column width="50%"}
+-   Low hemoglobin (Hgb) level in hemodialysis patients is adversely related to an increased odds of death
+
+-   Hemoglobin concentrations in these patients are shown to be associated with factors like Erythropoietin (EPO) dose, iron status, age, and sex
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="40%"}
+![](Figures/home-hemodialysis2.jpg){fig-align="right"}
+:::
+:::
+
+## Objectives
+
+::: {.callout-important icon="false"}
+## To investigate:
+
+-   The evolution of hemoglobin (Hgb) over time in hemodialysis patients
+
+-   How this evolution is influenced by EPO dose, iron deficiency status, age, and sex
+:::
+
+

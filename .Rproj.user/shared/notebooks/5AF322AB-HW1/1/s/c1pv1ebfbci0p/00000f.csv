@@ -1,0 +1,4 @@
+"0","hb_summary <- hemodialysis2 %>%"
+"0","  group_by(month) %>%"
+"0","  summarize(mean_hb = mean(hb),"
+"0","            sd_hb = sd(hb))"

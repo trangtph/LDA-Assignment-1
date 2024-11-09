@@ -1,0 +1,46 @@
+---
+title: "HW1 LDA"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE, message = FALSE}
+if (!require("pacman", quietly = TRUE)) {
+  install.packages("pacman")
+}
+library(pacman)
+pacman::p_load(tidyverse,
+               ggplot2,
+               rio, #import, export
+               here,
+               table1,
+               haven
+)
+```
+
+```{r}
+hemodialysis <- read_sas("hemodialysis.sas7bdat", NULL)
+hemodialysis2 <- na.omit(hemodialysis)
+```
+
+```{r}
+table1(~ hb + DOSE + month, data = hemodialysis)
+```
+
+```{r}
+hemodialysis2 <- hemodialysis %>%
+  filter(!is.na(month))
+table1(~ hb + DOSE | month, data = hemodialysis2)
+```
+
+```{r}
+hb_summary <- hemodialysis2 %>%
+  group_by(month) %>%
+  summarize(mean_hb = mean(hb),
+            sd_hb = sd(hb))
+```
+

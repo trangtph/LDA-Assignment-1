@@ -1,0 +1,95 @@
+/*-- scss:defaults --*/
+
+
+$body-color: #4e3629;
+$link-color: #ffc72c;
+$presentation-heading-color: #cc0000;
+$code-color: #cc0000;
+$code-block-bg: #f2eee0; 
+$code-block-border-color: #000000;
+
+$heading1Size: 2.77em;
+$heading2Size: 1.99em;
+$heading3Size: 1.33em;
+$heading4Size: 0.77em;
+
+$mainFontSize: 30px;
+
+/*-- scss:rules --*/
+
+.title{
+    color: #fefcff;
+    font-size: 2.5em;
+    font-family: $presentation-heading-font;
+    position: absolute;
+    bottom: 30%
+}
+
+.subtitle{
+    color: #808080;
+    font-size: 2em;
+    font-family: $presentation-heading-font;
+    position: absolute;
+    top: 33%
+}
+
+
+.author {
+    color: #fc405e;
+    font-size: 1.5em;
+    font-family: $presentation-heading-font;
+    position: absolute;
+    bottom: 15%;
+}
+
+.date {
+    color: #fc405e;
+    font-size: 1.5em;
+    font-family: $presentation-heading-font;
+    position: absolute;
+    bottom: 5%;
+}
+
+.reveal .slide-number {
+  color: $link-color;
+}
+
+.reveal .footer {
+  font-size: 0.3em !important;
+  text-align: right !important;
+}
+
+.reveal .slides section .fragment.semi-fade-out {
+	opacity: 1;
+	visibility: inherit;
+
+	&.visible {
+		opacity: 0.25;
+		visibility: inherit;
+	}
+}
+
+.sectionhead {
+  font-size: 0.8em;
+  text-align: center;
+  color: $presentation-heading-color;
+  font-family: $presentation-heading-font;
+  background-color: $body-bg;
+  margin: 0.5px;
+  padding: 1px 1px 1px 1px;
+  width: 120px;
+  border-left: 10px solid;
+}
+
+.blackbox {
+  color: #cc0000;
+  background-color: transparent;
+  margin: 1px;
+  height: 100px;
+  padding: 5px 2px 5px 2px;
+  border: 2px solid;
+}
+
+.callout-note {
+font-size: 1.5em
+}
