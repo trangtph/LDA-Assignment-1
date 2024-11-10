@@ -52,6 +52,8 @@ Longitudinal Data Analysis Project 1
 
 ## Objectives
 
+\
+\
 ::: {.callout-important icon="false"}
 ## To investigate:
 
@@ -63,55 +65,64 @@ Longitudinal Data Analysis Project 1
 ## Methods
 
 ### Dataset
-- Longitudinal data of 3823 patients with renal deficiency receiving hemodialysis over six months:
-    + Monthly Hgb concentrations
-    + Monthly Erythropoietin (EPO):  EPO for the next month was decided by the Hgb level of the current month
-    + Iron deficiency status at each month
-    + Background data: age and sex
-- Unbalanced data: not all patients were follow the whole six months
+
+-   Longitudinal data of 3823 patients with renal deficiency receiving hemodialysis over six months:
+    -   Monthly Hgb concentrations
+    -   Monthly Erythropoietin (EPO): EPO for the next month was decided by the Hgb level of the current month
+    -   Iron deficiency status at each month
+    -   Background data: age and sex
+-   Unbalanced data: not all patients were follow the whole six months
 
 ## Methods
 
-
 ### Exploratory Data Analyses
 
-- Individual-specific profiles
-- Graphical methods to explore mean structure, variance structure and correlation structure
-
+-   Individual-specific profiles
+-   Graphical methods to explore mean structure, variance structure and correlation structure
 
 ::: fragment
 ### Summary statistics
 
-- Analysis of each time point: comparison about hemoglobin levels between female and male group at each time point
-- Analysis of increment: subject-specific changes of hemoglobin from baseline ($y_{i1}$) to the last observation ($y_{in_{i}}$): $y_{in_{i}}-y_{i1}$
-- Area under the curve: 
-$$AUC_{i}=(t_{i2}-t_{i1})X(y_{i1}+y_{i2})/2+(t_{i3}-t_{i2})X(y_{i2}+y_{i3})/2+...$$
+-   Analysis of each time point: comparison about hemoglobin levels between female and male group at each time point
+-   Analysis of increment: subject-specific changes of hemoglobin from baseline ($y_{i1}$) to the last observation ($y_{in_{i}}$): $y_{in_{i}}-y_{i1}$
+-   Area under the curve: $$AUC_{i}=(t_{i2}-t_{i1})X(y_{i1}+y_{i2})/2+(t_{i3}-t_{i2})X(y_{i2}+y_{i3})/2+...$$
 :::
-
 
 ## Methods
 
 ### Multivariate model
 
+-   Initial model, with unstructured covariance: \begin{equation}
+    \begin{aligned}
+    Y_{ij} &= \beta_{0} + \beta_{1} \, \text{age}_{i} + \beta_{2} \, \text{sex}_{i} + \beta_{3} \, \text{iron}_{ij} + \beta_{4} \, \text{dose}_{ij} + \beta_{5} \, \text{month}_{j} + \beta_{6} \, \text{month}_{j}^{2} \\
+         &\quad + \beta_{7} (\text{dose}_{ij} \times \text{age}_{i}) + \beta_{8} (\text{dose}_{ij} \times \text{sex}_{i}) + \beta_{9} (\text{dose}_{ij} \times \text{iron}_{ij}) + \beta_{10} (\text{dose}_{ij} \times \text{month}_{j}) \\
+         &\quad + \beta_{11} (\text{month}_{j} \times \text{age}_{i}) + \beta_{12} (\text{month}_{j} \times \text{sex}_{i}) + \beta_{13} (\text{month}_{j} \times \text{iron}_{ij}) + \epsilon_{ij}
+    \end{aligned}
+    \end{equation}
+
+::: fragment
+-   Reduce mean structure: F-test
+-   Compare different covariance structures using LR test: unstructured type, simple type, compound symmetry type, banded type, first-order autoregressive type and Toeplitz type
+:::
+
 ## Methods
 
 ### Two-stage analysis model {.smaller .scrollable}
 
-
 ::: columns
 ::: {.column width="60%"}
 ::: fragment
-#### Stage 1: Linear regression model for each subject separately 
+#### Stage 1: Linear regression model for each subject separately
 
 $$Y_{ij} = \beta_{1i} + \beta_{2i} t_{ij} + \epsilon_{ij}, \quad j = 0, \dots, 5$$
 
 where:
 
-- $Y_{ij}$: the hemoglobin measurement for subject $i$ at time $j$.
-- $\beta_{1i}$: intercept for subject $i$
-- $\beta_{2i}$: the slope for subject $i$, showing the rate of change in hemoglobin level per month.
-- $t_{ij}$: the month of observation, measured from 0 to 5.
--  $\epsilon_{ij}$: error term for subject $i$ at time $j$, $\epsilon_{ij} \sim N(0, \sigma^2)$ 
+-   $Y_{ij}$: the hemoglobin measurement for subject $i$ at time $j$.
+-   $\beta_{1i}$: intercept for subject $i$
+-   $\beta_{2i}$: the slope for subject $i$, showing the rate of change in hemoglobin level per month.
+-   $t_{ij}$: the month of observation, measured from 0 to 5.
+-   $\epsilon_{ij}$: error term for subject $i$ at time $j$, $\epsilon_{ij} \sim N(0, \sigma^2)$
 :::
 :::
 
@@ -119,16 +130,15 @@ where:
 ::: fragment
 #### Stage 2: Explain variability in the subject-specific regression coefficients using known covariates
 
+```{=tex}
 \begin{equation}
 \begin{aligned}
     \beta_{1i} &= \beta_0^{(1)} + \beta_{\text{Age}}^{(1)} \cdot \text{Age}_i + b_{1i} \\
     \beta_{2i} &= \beta_0^{(2)} + \beta_{\text{Age}}^{(2)} \cdot \text{Age}_i + b_{2i}
 \end{aligned}
 \end{equation}
-
-
-
-- $b_{1i}$, $b_{2i}$ are independent and $\sim N(0,D)$
+```
+-   $b_{1i}$, $b_{2i}$ are independent and $\sim N(0,D)$
 :::
 :::
 :::
@@ -140,19 +150,23 @@ where:
 Four-stage model building process:
 
 #### Step 1: elaborated LMM
-$$Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij} +$$
 
-$$\beta_5t_{ij} + (\beta_6Age_i + \beta_7Sex_i + \beta_7Dose_{ij} + \beta_8Iron_{ij})t_{ij} +$$
-$$b_{1i} + b_{2j}t{ij} + \epsilon_{ij}$$
-
-- $b_{1i}$, $b_{2i} \sim N(0,D)$
-- $\epsilon \sim N(0,\Sigma_i)$
+```{=tex}
+\begin{equation}
+\begin{aligned}
+Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij} + \beta_5t_{ij} + \\
+(\beta_6Age_i + \beta_7Sex_i + \beta_7Dose_{ij} + \beta_8Iron_{ij})t_{ij} + \\
+  b_{1i} + b_{2j}t_{ij} + \epsilon_{ij}
+\end{aligned}
+\end{equation}
+```
+-   $b_{1i}$, $b_{2i} \sim N(0,D)$
+-   $\epsilon \sim N(0,\Sigma_i)$
 
 ::: fragment
 #### Step 2: Adding serial correlation function to residual covariance structure
 
-- Comprare models with Gaussian serial correlation, exponential serial correlation, and without
-serial correlation using REML log-likelihood
+-   Comprare models with Gaussian serial correlation, exponential serial correlation, and without serial correlation using REML log-likelihood
 :::
 
 ## Methods
@@ -162,7 +176,54 @@ serial correlation using REML log-likelihood
 Four-stage model building process:
 
 #### Step 3: Reduce random effect structure
-- Compare model with both random intercept and slope for time with model with only intercept or only slope, using Likelihood ratio test
+
+-   Compare model with both random intercept and slope for time with model with only intercept or only slope, using Likelihood ratio test
 
 #### Step 4: Reduce mean structure
-- Compare model from step 3 with models removing interaction effects one by one, using F-test
+
+-   Compare model from step 3 with models removing interaction effects one by one, using F-test
+
+## Results
+
+### Exploratory Data Analysis
+
+::: columns 
+::: {.column width="40%"}
+
+-   Individual profiles
+
+
+![](Results/individual_profile.png)
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="40%"}
+
+-   Mean structure
+
+
+![](Results/mean_structure.png)
+:::
+:::
+
+## Results
+
+### Exploratory Data Analysis
+
+::: columns 
+::: {.column width="40%"}
+- Variance structure
+![](Results/var_structure.png)
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="40%"}
+- Covariance structure
+![](Results/corre-matrix-Hgb.png)
+:::
+:::
+

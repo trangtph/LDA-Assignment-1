@@ -360,19 +360,13 @@
 </section>
 <section id="objectives" class="slide level2">
 <h2>Objectives</h2>
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>To investigate:</strong></p>
-</div>
-<div class="callout-content">
+<p><br>
+<br>
+::: {.callout-important icon=“false”} ## To investigate:</p>
 <ul>
 <li><p>The evolution of hemoglobin (Hgb) over time in hemodialysis patients</p></li>
-<li><p>How this evolution is influenced by EPO dose, iron deficiency status, age, and sex</p></li>
+<li><p>How this evolution is influenced by EPO dose, iron deficiency status, age, and sex :::</p></li>
 </ul>
-</div>
-</div>
-</div>
 </section>
 <section id="methods" class="slide level2">
 <h2>Methods</h2>
@@ -408,12 +402,29 @@
 <section id="methods-2" class="slide level2">
 <h2>Methods</h2>
 <h3 id="multivariate-model">Multivariate model</h3>
+<ul>
+<li>Initial model, with unstructured covariance: <span class="math display">\[\begin{equation}
+\begin{aligned}
+Y_{ij} &amp;= \beta_{0} + \beta_{1} \, \text{age}_{i} + \beta_{2} \, \text{sex}_{i} + \beta_{3} \, \text{iron}_{ij} + \beta_{4} \, \text{dose}_{ij} + \beta_{5} \, \text{month}_{j} + \beta_{6} \, \text{month}_{j}^{2} \\
+     &amp;\quad + \beta_{7} (\text{dose}_{ij} \times \text{age}_{i}) + \beta_{8} (\text{dose}_{ij} \times \text{sex}_{i}) + \beta_{9} (\text{dose}_{ij} \times \text{iron}_{ij}) + \beta_{10} (\text{dose}_{ij} \times \text{month}_{j}) \\
+     &amp;\quad + \beta_{11} (\text{month}_{j} \times \text{age}_{i}) + \beta_{12} (\text{month}_{j} \times \text{sex}_{i}) + \beta_{13} (\text{month}_{j} \times \text{iron}_{ij}) + \epsilon_{ij}
+\end{aligned}
+\end{equation}\]</span></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Reduce mean structure: F-test</li>
+<li>Compare different covariance structures using LR test: unstructured type, simple type, compound symmetry type, banded type, first-order autoregressive type and Toeplitz type</li>
+</ul>
+</div>
 </section>
 <section id="methods-3" class="slide level2">
 <h2>Methods</h2>
 <h3 class="smaller scrollable" id="two-stage-analysis-model">Two-stage analysis model</h3>
 <div class="columns">
 <div class="column" style="width:60%;">
+<div class="fragment">
+<!-- -->
 <h4 id="stage-1-linear-regression-model-for-each-subject-separately">Stage 1: Linear regression model for each subject separately</h4>
 <p><span class="math display">\[Y_{ij} = \beta_{1i} + \beta_{2i} t_{ij} + \epsilon_{ij}, \quad j = 0, \dots, 5\]</span></p>
 <p>where:</p>
@@ -424,17 +435,21 @@
 <li><span class="math inline">\(t_{ij}\)</span>: the month of observation, measured from 0 to 5.</li>
 <li><span class="math inline">\(\epsilon_{ij}\)</span>: error term for subject <span class="math inline">\(i\)</span> at time <span class="math inline">\(j\)</span>, <span class="math inline">\(\epsilon_{ij} \sim N(0, \sigma^2)\)</span></li>
 </ul>
+</div>
 </div><div class="column" style="width:40%;">
+<div class="fragment">
+<!-- -->
 <h4 id="stage-2-explain-variability-in-the-subject-specific-regression-coefficients-using-known-covariates">Stage 2: Explain variability in the subject-specific regression coefficients using known covariates</h4>
-<p><span class="math display">\[\begin{equation}
+<span class="math display">\[\begin{equation}
 \begin{aligned}
     \beta_{1i} &amp;= \beta_0^{(1)} + \beta_{\text{Age}}^{(1)} \cdot \text{Age}_i + b_{1i} \\
     \beta_{2i} &amp;= \beta_0^{(2)} + \beta_{\text{Age}}^{(2)} \cdot \text{Age}_i + b_{2i}
 \end{aligned}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <ul>
 <li><span class="math inline">\(b_{1i}\)</span>, <span class="math inline">\(b_{2i}\)</span> are independent and <span class="math inline">\(\sim N(0,D)\)</span></li>
 </ul>
+</div>
 </div></div>
 </section>
 <section id="methods-4" class="slide level2">
@@ -442,8 +457,13 @@
 <h3 id="linear-mixed-model">Linear mixed model</h3>
 <p>Four-stage model building process:</p>
 <h4 id="step-1-elaborated-lmm">Step 1: elaborated LMM</h4>
-<p><span class="math display">\[Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij} +\]</span></p>
-<p><span class="math display">\[\beta_5t_{ij} + (\beta_6Age_i + \beta_7Sex_i + \beta_7Dose_{ij} + \beta_8Iron_{ij})t_{ij} +\]</span> <span class="math display">\[b_{1i} + b_{2j}t{ij} + \epsilon_{ij}\]</span></p>
+<span class="math display">\[\begin{equation}
+\begin{aligned}
+Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij} + \beta_5t_{ij} + \\
+(\beta_6Age_i + \beta_7Sex_i + \beta_7Dose_{ij} + \beta_8Iron_{ij})t_{ij} + \\
+  b_{1i} + b_{2j}t_{ij} + \epsilon_{ij}
+\end{aligned}
+\end{equation}\]</span>
 <ul>
 <li><span class="math inline">\(b_{1i}\)</span>, <span class="math inline">\(b_{2i} \sim N(0,D)\)</span></li>
 <li><span class="math inline">\(\epsilon \sim N(0,\Sigma_i)\)</span></li>
@@ -468,6 +488,40 @@
 <ul>
 <li>Compare model from step 3 with models removing interaction effects one by one, using F-test</li>
 </ul>
+</section>
+<section id="results" class="slide level2">
+<h2>Results</h2>
+<h3 id="exploratory-data-analysis">Exploratory Data Analysis</h3>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>Individual profiles</li>
+</ul>
+<p><img data-src="Results/individual_profile.png"></p>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:40%;">
+<ul>
+<li>Mean structure</li>
+</ul>
+<p><img data-src="Results/mean_structure.png"></p>
+</div></div>
+</section>
+<section id="results-1" class="slide level2">
+<h2>Results</h2>
+<h3 id="exploratory-data-analysis-1">Exploratory Data Analysis</h3>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>Variance structure <img data-src="Results/var_structure.png"></li>
+</ul>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:45%;">
+<ul>
+<li>Covariance structure <img data-src="Results/corre-matrix-Hgb.png"></li>
+</ul>
+</div></div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
