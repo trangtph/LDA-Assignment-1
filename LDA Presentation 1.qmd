@@ -59,5 +59,3 @@ Longitudinal Data Analysis Project 1
 
 -   How this evolution is influenced by EPO dose, iron deficiency status, age, and sex
 :::
-
-
