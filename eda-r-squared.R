@@ -8,11 +8,12 @@ hemo <- read_sas("hemodialysis.sas7bdat")
 hemo <- hemo %>% 
   filter(!is.na(hb)) %>% 
   group_by(ID) %>% 
-  filter(n() > 2)
+  filter(n() > 3)
 
 # count distinct patients
 n_distinct(hemo$ID) # 2933 patients having more than 1 hb
 # 2089 patients having more than 2 hb
+# 925 patients having more than 3 hb
 
 # test linear trend ---------------------------------------------------------
 
@@ -51,6 +52,7 @@ R2_meta <- sum(unlist(SSR)) / sum(unlist(SSR) + unlist(SSE))
 
 # Display the meta R-squared result
 R2_meta
+# 0.5160457
 
 ## plotting ------------------------------------------------------------------
 
@@ -116,6 +118,7 @@ R2_meta <- sum(unlist(SSR)) / sum(unlist(SSR) + unlist(SSE))
 
 # Display the meta R-squared result
 R2_meta
+# 0.7270484
 
 # plotting ------------------------------------------------------------------
 
@@ -147,5 +150,62 @@ ggplot(plot_data, aes(x = ni, y = r2)) +
 
 # Save plot
 ggsave("Results/r-squared-quadratic.png", width = 8, height = 6, dpi = 300)
+
+# test for model extension ------------------------------------------------
+
+# Initialize lists to store statistics for each patient
+# Initialize lists to store statistics for each patient
+SSE_R <- list()  # SSE for the linear model
+SSE_F <- list()  # SSE for the extended (quadratic) model
+p <- 2  # Number of parameters in the original (linear) model
+p_ext <- 1  # Number of parameters added in the extended (quadratic) model (for month^2 term)
+ni <- list()  # Number of observations for each patient
+
+# Loop through each unique patient ID
+for (i in unique(hemo$ID)) {
+  # Subset data for the current patient
+  patient_data <- hemo[hemo$ID == i, ]
+  
+  # Fit the linear model (original model)
+  Model_R <- lm(hb ~ month, data = patient_data, x = TRUE)
+  
+  # Fit the quadratic model (extended model)
+  Model_F <- lm(hb ~ month + I(month^2), data = patient_data, x = TRUE)
+  
+  # Calculate SSE for both models
+  SSE_R[[i]] <- sum(Model_R$residuals^2)
+  SSE_F[[i]] <- sum(Model_F$residuals^2)
+  
+  # Number of observations for the current patient
+  ni[[i]] <- length(Model_R$fitted.values)
+}
+
+# Calculate the individual F-statistics for each patient
+F_individual <- list()
+for (i in unique(hemo$ID)) {
+  SSE_R_i <- SSE_R[[i]]
+  SSE_F_i <- SSE_F[[i]]
+  n_i <- ni[[i]]
+  
+  # Calculate the F-statistic for this patient
+  F_individual[[i]] <- ((SSE_R_i - SSE_F_i) / p_ext) / (SSE_F_i / (n_i - p - p_ext))
+}
+
+# Calculate the meta F-statistic
+F_meta_numerator <- sum(unlist(SSE_R) - unlist(SSE_F)) / p_ext
+F_meta_denominator <- sum(unlist(SSE_F)) / (sum(unlist(ni)) - p - p_ext)
+
+F_meta <- F_meta_numerator / F_meta_denominator
+
+# You may also want to calculate the degrees of freedom for the null distribution
+df1 <- p_ext  # The number of parameters added in the extended model
+df2 <- sum(unlist(ni)) - p - p_ext  # The remaining degrees of freedom
+
+# Calculate the p-value from the F-distribution
+p_value <- 1 - pf(F_meta, df1 = df1, df2 = df2)
+
+# Print the p-value
+cat("The p-value for the test is:", p_value, "\n")
+
 
 
