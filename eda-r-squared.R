@@ -1,6 +1,7 @@
 # import sas dataset --------------------------------------------------------
 library(haven)
 library(tidyverse)
+library(patchwork)
 
 hemo <- read_sas("hemodialysis.sas7bdat")
 
@@ -64,10 +65,10 @@ ni_values <- unlist(ni)
 plot_data <- data.frame(ni = ni_values, r2 = r2_values)
 
 # Plot using ggplot2
-ggplot(plot_data, aes(x = ni, y = r2)) +
+linear <- ggplot(plot_data, aes(x = ni, y = r2)) +
   geom_point(color = "blue", size = 2, alpha = 0.7) +       # Scatter plot points
   geom_hline(yintercept = R2_meta, color = "red", linetype = "dashed", size = 1) + # Horizontal line for R2_meta
-  labs(title = "The linear function with time seems to describe the data reasonably well",
+  labs(title = "The linear function with time describes the data reasonably well",
        x = expression(Number~n[i]~of~measurements),
        y = expression(Coefficient~R[i]^2)) +
   theme_minimal() +                                          # Minimal theme for clean look
@@ -120,7 +121,7 @@ R2_meta <- sum(unlist(SSR)) / sum(unlist(SSR) + unlist(SSE))
 R2_meta
 # 0.7270484
 
-# plotting ------------------------------------------------------------------
+## plotting ------------------------------------------------------------------
 
 # Convert lists to numeric vectors for plotting
 r2_values <- unlist(r2)
@@ -130,11 +131,11 @@ ni_values <- unlist(ni)
 plot_data <- data.frame(ni = ni_values, r2 = r2_values)
 
 # Plot using ggplot2
-ggplot(plot_data, aes(x = ni, y = r2)) +
+quadratic <- ggplot(plot_data, aes(x = ni, y = r2)) +
   geom_point(color = "blue", size = 2, alpha = 0.7) +       # Scatter plot points
   geom_hline(yintercept = R2_meta, color = "red", linetype = "dashed", size = 1) + # Horizontal line for R2_meta
   labs(
-    title = "Quadratic Model of hb vs. Month per Patient",
+    title = "The quadratic function with time significantly improves the model fit",
     x = expression(Number~n[i]~of~measurements),
     y = expression(Coefficient~R[i]^2)
   ) +
@@ -150,6 +151,11 @@ ggplot(plot_data, aes(x = ni, y = r2)) +
 
 # Save plot
 ggsave("Results/r-squared-quadratic.png", width = 8, height = 6, dpi = 300)
+
+## combine two plots ---------------------------------------------------------
+
+linear + quadratic + plot_layout(guides = "collect")
+ggsave("Results/r-squared-combined.png", width = 19, height = 9, dpi = 300)
 
 # test for model extension ------------------------------------------------
 
