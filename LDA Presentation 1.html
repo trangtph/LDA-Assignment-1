@@ -358,15 +358,14 @@
 </div>
 </div></div>
 </section>
-<section id="objective" class="slide level2">
-<h2>Objective</h2>
+<section id="objectives" class="slide level2">
+<h2>Objectives</h2>
 <div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Important</strong></p>
+<p><strong>To investigate:</strong></p>
 </div>
 <div class="callout-content">
-<p>To investigate:</p>
 <ul>
 <li><p>The evolution of hemoglobin (Hgb) over time in hemodialysis patients</p></li>
 <li><p>How this evolution is influenced by EPO dose, iron deficiency status, age, and sex</p></li>
@@ -374,6 +373,101 @@
 </div>
 </div>
 </div>
+</section>
+<section id="methods" class="slide level2">
+<h2>Methods</h2>
+<h3 id="dataset">Dataset</h3>
+<ul>
+<li>Longitudinal data of 3823 patients with renal deficiency receiving hemodialysis over six months:
+<ul>
+<li>Monthly Hgb concentrations</li>
+<li>Monthly Erythropoietin (EPO): EPO for the next month was decided by the Hgb level of the current month</li>
+<li>Iron deficiency status at each month</li>
+<li>Background data: age and sex</li>
+</ul></li>
+<li>Unbalanced data: not all patients were follow the whole six months</li>
+</ul>
+</section>
+<section id="methods-1" class="slide level2">
+<h2>Methods</h2>
+<h3 id="exploratory-data-analyses">Exploratory Data Analyses</h3>
+<ul>
+<li>Individual-specific profiles</li>
+<li>Graphical methods to explore mean structure, variance structure and correlation structure</li>
+</ul>
+<div class="fragment">
+<!-- -->
+<h3 id="summary-statistics">Summary statistics</h3>
+<ul>
+<li>Analysis of each time point: comparison about hemoglobin levels between female and male group at each time point</li>
+<li>Analysis of increment: subject-specific changes of hemoglobin from baseline (<span class="math inline">\(y_{i1}\)</span>) to the last observation (<span class="math inline">\(y_{in_{i}}\)</span>): <span class="math inline">\(y_{in_{i}}-y_{i1}\)</span></li>
+<li>Area under the curve: <span class="math display">\[AUC_{i}=(t_{i2}-t_{i1})X(y_{i1}+y_{i2})/2+(t_{i3}-t_{i2})X(y_{i2}+y_{i3})/2+...\]</span></li>
+</ul>
+</div>
+</section>
+<section id="methods-2" class="slide level2">
+<h2>Methods</h2>
+<h3 id="multivariate-model">Multivariate model</h3>
+</section>
+<section id="methods-3" class="slide level2">
+<h2>Methods</h2>
+<h3 class="smaller scrollable" id="two-stage-analysis-model">Two-stage analysis model</h3>
+<div class="columns">
+<div class="column" style="width:60%;">
+<h4 id="stage-1-linear-regression-model-for-each-subject-separately">Stage 1: Linear regression model for each subject separately</h4>
+<p><span class="math display">\[Y_{ij} = \beta_{1i} + \beta_{2i} t_{ij} + \epsilon_{ij}, \quad j = 0, \dots, 5\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(Y_{ij}\)</span>: the hemoglobin measurement for subject <span class="math inline">\(i\)</span> at time <span class="math inline">\(j\)</span>.</li>
+<li><span class="math inline">\(\beta_{1i}\)</span>: intercept for subject <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(\beta_{2i}\)</span>: the slope for subject <span class="math inline">\(i\)</span>, showing the rate of change in hemoglobin level per month.</li>
+<li><span class="math inline">\(t_{ij}\)</span>: the month of observation, measured from 0 to 5.</li>
+<li><span class="math inline">\(\epsilon_{ij}\)</span>: error term for subject <span class="math inline">\(i\)</span> at time <span class="math inline">\(j\)</span>, <span class="math inline">\(\epsilon_{ij} \sim N(0, \sigma^2)\)</span></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<h4 id="stage-2-explain-variability-in-the-subject-specific-regression-coefficients-using-known-covariates">Stage 2: Explain variability in the subject-specific regression coefficients using known covariates</h4>
+<p><span class="math display">\[\begin{equation}
+\begin{aligned}
+    \beta_{1i} &amp;= \beta_0^{(1)} + \beta_{\text{Age}}^{(1)} \cdot \text{Age}_i + b_{1i} \\
+    \beta_{2i} &amp;= \beta_0^{(2)} + \beta_{\text{Age}}^{(2)} \cdot \text{Age}_i + b_{2i}
+\end{aligned}
+\end{equation}\]</span></p>
+<ul>
+<li><span class="math inline">\(b_{1i}\)</span>, <span class="math inline">\(b_{2i}\)</span> are independent and <span class="math inline">\(\sim N(0,D)\)</span></li>
+</ul>
+</div></div>
+</section>
+<section id="methods-4" class="slide level2">
+<h2>Methods</h2>
+<h3 id="linear-mixed-model">Linear mixed model</h3>
+<p>Four-stage model building process:</p>
+<h4 id="step-1-elaborated-lmm">Step 1: elaborated LMM</h4>
+<p><span class="math display">\[Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij} +\]</span></p>
+<p><span class="math display">\[\beta_5t_{ij} + (\beta_6Age_i + \beta_7Sex_i + \beta_7Dose_{ij} + \beta_8Iron_{ij})t_{ij} +\]</span> <span class="math display">\[b_{1i} + b_{2j}t{ij} + \epsilon_{ij}\]</span></p>
+<ul>
+<li><span class="math inline">\(b_{1i}\)</span>, <span class="math inline">\(b_{2i} \sim N(0,D)\)</span></li>
+<li><span class="math inline">\(\epsilon \sim N(0,\Sigma_i)\)</span></li>
+</ul>
+<div class="fragment">
+<!-- -->
+<h4 id="step-2-adding-serial-correlation-function-to-residual-covariance-structure">Step 2: Adding serial correlation function to residual covariance structure</h4>
+<ul>
+<li>Comprare models with Gaussian serial correlation, exponential serial correlation, and without serial correlation using REML log-likelihood</li>
+</ul>
+</div>
+</section>
+<section id="methods-5" class="slide level2">
+<h2>Methods</h2>
+<h3 id="linear-mixed-model-1">Linear mixed model</h3>
+<p>Four-stage model building process:</p>
+<h4 id="step-3-reduce-random-effect-structure">Step 3: Reduce random effect structure</h4>
+<ul>
+<li>Compare model with both random intercept and slope for time with model with only intercept or only slope, using Likelihood ratio test</li>
+</ul>
+<h4 id="step-4-reduce-mean-structure">Step 4: Reduce mean structure</h4>
+<ul>
+<li>Compare model from step 3 with models removing interaction effects one by one, using F-test</li>
+</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
