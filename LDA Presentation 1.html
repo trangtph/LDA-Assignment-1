@@ -343,30 +343,34 @@
 <section id="background" class="slide level2">
 <h2>Background</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column" style="width:60%;">
 <ul>
 <li><p>Low hemoglobin (Hgb) level in hemodialysis patients is adversely related to an increased odds of death</p></li>
 <li><p>Hemoglobin concentrations in these patients are shown to be associated with factors like Erythropoietin (EPO) dose, iron status, age, and sex</p></li>
 </ul>
-</div><div class="column" style="width:10%;">
+<h3 id="objectives">Objectives</h3>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>To investigate:</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li><p>The evolution of hemoglobin (Hgb) over time in hemodialysis patients</p></li>
+<li><p>How this evolution is influenced by EPO dose, iron deficiency status, age, and sex</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:5%;">
 
-</div><div class="column" style="width:40%;">
+</div><div class="column" style="width:35%;">
 <div class="quarto-figure quarto-figure-right">
 <figure>
 <p><img data-src="Figures/home-hemodialysis2.jpg" class="quarto-figure quarto-figure-right"></p>
 </figure>
 </div>
 </div></div>
-</section>
-<section id="objectives" class="slide level2">
-<h2>Objectives</h2>
-<p><br>
-<br>
-::: {.callout-important icon=“false”} ## To investigate:</p>
-<ul>
-<li><p>The evolution of hemoglobin (Hgb) over time in hemodialysis patients</p></li>
-<li><p>How this evolution is influenced by EPO dose, iron deficiency status, age, and sex :::</p></li>
-</ul>
 </section>
 <section id="methods" class="slide level2">
 <h2>Methods</h2>
@@ -388,6 +392,7 @@
 <ul>
 <li>Individual-specific profiles</li>
 <li>Graphical methods to explore mean structure, variance structure and correlation structure</li>
+<li>Test linear and quadratic relationship of Hgb and time: <span class="math inline">\(R^2_{meta}\)</span></li>
 </ul>
 <div class="fragment">
 <!-- -->
@@ -398,6 +403,19 @@
 <li>Area under the curve: <span class="math display">\[AUC_{i}=(t_{i2}-t_{i1})X(y_{i1}+y_{i2})/2+(t_{i3}-t_{i2})X(y_{i2}+y_{i3})/2+...\]</span></li>
 </ul>
 </div>
+<aside class="notes">
+<p>We fitted each model for each subject who has at least 4 Hgb measurements, and then we combined the results in the form of meta-analysis using R2 meta</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="methods-2" class="slide level2">
 <h2>Methods</h2>
@@ -451,6 +469,19 @@ Y_{ij} &amp;= \beta_{0} + \beta_{1} \, \text{age}_{i} + \beta_{2} \, \text{sex}_
 </ul>
 </div>
 </div></div>
+<aside class="notes">
+<p>we modeled the between-subject variability by examining the effect of age on the intercepts and slopes</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="methods-4" class="slide level2">
 <h2>Methods</h2>
@@ -493,34 +524,53 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <h2>Results</h2>
 <h3 id="exploratory-data-analysis">Exploratory Data Analysis</h3>
 <div class="columns">
-<div class="column" style="width:40%;">
+<div class="column" style="width:60%;">
 <ul>
 <li>Individual profiles</li>
 </ul>
 <p><img data-src="Results/individual_profile.png"></p>
 </div><div class="column" style="width:10%;">
 
-</div><div class="column" style="width:40%;">
+</div><div class="column" style="width:30%;">
 <ul>
-<li>Mean structure</li>
+<li>Model assuming a linear relationship between each patient’s Hgb and time: <span class="math inline">\(R^2_{meta} = 0.52\)</span></li>
+<li>Model assuming a quadratic relationship: <span class="math inline">\(R^2_{meta} = 0.73\)</span></li>
+<li>F-test for addition of quadratic to linear relationship: p &lt;0.0001</li>
 </ul>
-<p><img data-src="Results/mean_structure.png"></p>
 </div></div>
+<aside class="notes">
+<p>There exists both between-subject and within-subject variability. the patients have a different Hb at the start of the experiment and this also changes with time.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="results-1" class="slide level2">
 <h2>Results</h2>
 <h3 id="exploratory-data-analysis-1">Exploratory Data Analysis</h3>
 <div class="columns">
-<div class="column" style="width:40%;">
+<div class="column" style="width:33%;">
 <ul>
-<li>Variance structure <img data-src="Results/var_structure.png"></li>
+<li>Mean structure</li>
 </ul>
-</div><div class="column" style="width:5%;">
-
-</div><div class="column" style="width:45%;">
+<p><img data-src="Results/mean_structure.png"></p>
+</div><div class="column" style="width:33%;">
 <ul>
-<li>Covariance structure <img data-src="Results/corre-matrix-Hgb.png"></li>
+<li>Variance structure</li>
 </ul>
+<p><img data-src="Results/var_structure.png"></p>
+</div><div class="column" style="width:34%;">
+<ul>
+<li>Covariance structure</li>
+</ul>
+<p><img data-src="Results/corre-matrix-Hgb.png"></p>
 </div></div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

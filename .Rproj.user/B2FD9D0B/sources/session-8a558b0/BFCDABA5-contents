@@ -36,30 +36,28 @@ Longitudinal Data Analysis Project 1
 ## Background
 
 ::: columns
-::: {.column width="50%"}
+::: {.column width="60%"}
 -   Low hemoglobin (Hgb) level in hemodialysis patients is adversely related to an increased odds of death
 
 -   Hemoglobin concentrations in these patients are shown to be associated with factors like Erythropoietin (EPO) dose, iron status, age, and sex
-:::
 
-::: {.column width="10%"}
-:::
+### Objectives
 
-::: {.column width="40%"}
-![](Figures/home-hemodialysis2.jpg){fig-align="right"}
-:::
-:::
-
-## Objectives
-
-\
-\
 ::: {.callout-important icon="false"}
 ## To investigate:
 
 -   The evolution of hemoglobin (Hgb) over time in hemodialysis patients
 
 -   How this evolution is influenced by EPO dose, iron deficiency status, age, and sex
+:::
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="35%"}
+![](Figures/home-hemodialysis2.jpg){fig-align="right"}
+:::
 :::
 
 ## Methods
@@ -79,6 +77,7 @@ Longitudinal Data Analysis Project 1
 
 -   Individual-specific profiles
 -   Graphical methods to explore mean structure, variance structure and correlation structure
+-   Test linear and quadratic relationship of Hgb and time: $R^2_{meta}$
 
 ::: fragment
 ### Summary statistics
@@ -86,6 +85,10 @@ Longitudinal Data Analysis Project 1
 -   Analysis of each time point: comparison about hemoglobin levels between female and male group at each time point
 -   Analysis of increment: subject-specific changes of hemoglobin from baseline ($y_{i1}$) to the last observation ($y_{in_{i}}$): $y_{in_{i}}-y_{i1}$
 -   Area under the curve: $$AUC_{i}=(t_{i2}-t_{i1})X(y_{i1}+y_{i2})/2+(t_{i3}-t_{i2})X(y_{i2}+y_{i3})/2+...$$
+:::
+
+::: notes
+We fitted each model for each subject who has at least 4 Hgb measurements, and then we combined the results in the form of meta-analysis using R2 meta
 :::
 
 ## Methods
@@ -143,6 +146,10 @@ where:
 :::
 :::
 
+::: notes
+we modeled the between-subject variability by examining the effect of age on the intercepts and slopes
+:::
+
 ## Methods
 
 ### Linear mixed model
@@ -187,11 +194,9 @@ Four-stage model building process:
 
 ### Exploratory Data Analysis
 
-::: columns 
-::: {.column width="40%"}
-
+::: columns
+::: {.column width="60%"}
 -   Individual profiles
-
 
 ![](Results/individual_profile.png)
 :::
@@ -199,31 +204,40 @@ Four-stage model building process:
 ::: {.column width="10%"}
 :::
 
-::: {.column width="40%"}
+::: {.column width="30%"}
 
--   Mean structure
-
-
-![](Results/mean_structure.png)
+- Model assuming a linear relationship between each patient's Hgb and time: $R^2_{meta} = 0.52$
+- Model assuming a quadratic relationship: $R^2_{meta} = 0.73$
+- F-test for addition of quadratic to linear relationship: p <0.0001
 :::
+:::
+
+::: notes
+There exists both between-subject and within-subject variability. the patients have a different Hb at the start of the experiment and this also changes with time.
 :::
 
 ## Results
 
 ### Exploratory Data Analysis
 
-::: columns 
-::: {.column width="40%"}
-- Variance structure
+::: columns
+::: {.column width="33%"}
+-   Mean structure
+
+![](Results/mean_structure.png)
+
+
+:::
+
+::: {.column width="33%"}
+-   Variance structure
+
 ![](Results/var_structure.png)
 :::
 
-::: {.column width="10%"}
-:::
+::: {.column width="34%"}
+-   Covariance structure 
 
-::: {.column width="40%"}
-- Covariance structure
 ![](Results/corre-matrix-Hgb.png)
 :::
 :::
-
