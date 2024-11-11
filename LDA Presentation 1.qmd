@@ -338,12 +338,12 @@ Now Luong will continue the presentation.
 | Intercept    | 2933  | 10.92    | 1.36         | 4.45        | 18.77       |
 | month        | 2933  | 0.03     | 0.69         | -5.00       | 7.10        |
 
-- The mean Hgb concentration on the first 1 is 10.92 g/dl (ranging from 4.45 to 18.77)
-- The mean slope is 0.03 (ranging from -5 to 7.1)
+- The mean Hgb concentration on the first month was 10.92 g/dl (ranging from 4.45 to 18.77)
+- The mean slope was 0.03 (ranging from -5 to 7.1)
 
 ::: notes
 A linear regression model between Hgb and time was fitted for each patient to explain within-subject variability. 
-The mean Hgb concentration on the first 1 is 10.92 g/dl (ranging from 4.45 to 18.77) and the mean slope is 0.03 (ranging from -5 to 7.1)
+The mean Hgb concentration on the first month is 10.92 g/dl (ranging from 4.45 to 18.77) and the mean slope is 0.03 (ranging from -5 to 7.1)
 
 Note: this slide can be removed for the interest of time
 :::
