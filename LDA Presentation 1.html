@@ -8,7 +8,7 @@
 <link href="LDA Presentation 1_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="LDA Presentation 1_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="LDA Presentation 1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.5.57">
+  <meta name="generator" content="quarto-1.4.553">
 
   <title>lda-presentation-1</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -365,7 +365,8 @@
 <p><img data-src="Figures/home-hemodialysis2.jpg" class="quarto-figure quarto-figure-right"></p>
 </figure>
 </div>
-</div></div>
+</div>
+</div>
 </section>
 <section id="methods" class="slide level2">
 <h2>Methods</h2>
@@ -476,9 +477,10 @@ Y_{ij} &amp;= \beta_{0} + \beta_{1} \, \text{age}_{i} + \beta_{2} \, \text{sex}_
 <li><span class="math inline">\(b_{1i}\)</span>, <span class="math inline">\(b_{2i}\)</span> are independent and <span class="math inline">\(\sim N(0,D)\)</span></li>
 </ul>
 </div>
-</div></div>
+</div>
+</div>
 <aside class="notes">
-<p>Firt we model the linear relationship of each subject’s hemoglobin with time Then we modeled the between-subject variability by examining the effect of age on the intercepts and slopes</p>
+<p>First we model the linear relationship of each subject’s hemoglobin with time Then we modeled the between-subject variability by examining the effect of age on the intercepts and slopes</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -546,7 +548,8 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <li>Model assuming a quadratic relationship: <span class="math inline">\(R^2_{meta} = 0.73\)</span></li>
 <li>F-test for addition of quadratic to linear relationship: p &lt;0.0001</li>
 </ul>
-</div></div>
+</div>
+</div>
 <aside class="notes">
 <p>The patients have a different Hb at the start of the experiment and this also changes with time. We modeled individual Hb over time and R squared and F_test suggested that a quadratic relationship with time may explain the data better than linear relationship</p>
 <style type="text/css">
@@ -580,7 +583,8 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <li>Covariance structure</li>
 </ul>
 <p><img data-src="Results/corre-matrix-Hgb.png"></p>
-</div></div>
+</div>
+</div>
 <aside class="notes">
 <p>The mean Hgb level increases approximately linear over time.</p>
 <p>stable variance over time with an increase in standard error at each time point</p>
@@ -615,7 +619,8 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <li>No significant effect of sex on AUC</li>
 </ul></li>
 </ul>
-</div></div>
+</div>
+</div>
 <aside class="notes">
 <p>Change of Hgb level from baseline to the last measured level varied dramatically. Majority of patients tended to have minor change in Hgb levels. Increase in age leads to increase in AUC. Disadvantages: only use partial information so not insightful</p>
 <style type="text/css">
@@ -636,7 +641,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <ul>
 <li>Reduce each term and perform F-test against the full model:</li>
 </ul>
-<table class="caption-top">
+<table>
 <thead>
 <tr class="header">
 <th>Reduction</th>
@@ -696,7 +701,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <section id="multivariate-model-2" class="slide level2">
 <h2>Multivariate model</h2>
 <h3 id="finding-appropriate-covariance-structure">Finding appropriate covariance structure</h3>
-<table class="caption-top" style="width:100%;">
+<table style="width:100%;">
 <colgroup>
 <col style="width: 16%">
 <col style="width: 16%">
@@ -786,7 +791,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <ul>
 <li>Effect estimates:</li>
 </ul>
-<table class="caption-top">
+<table>
 <thead>
 <tr class="header">
 <th>Effect</th>
@@ -849,6 +854,438 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <aside class="notes">
 <p>The estimates from the final models suggest that Hemoglobin increase with age, male gender, and EPO dose. The effect of EPO dose increase over time. People with iron deficiency suprisingly have higher Hemoglobin level, but that effect decreases over time.</p>
 <p>Now Luong will continue the presentation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="two-stage-analysis" class="slide level2">
+<h2>Two-stage analysis</h2>
+<h3 id="stage-1-analysis">Stage-1 analysis</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 9%">
+<col style="width: 14%">
+<col style="width: 19%">
+<col style="width: 18%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Variable</strong></th>
+<th><strong>N</strong></th>
+<th><strong>Mean</strong></th>
+<th><strong>Std Dev</strong></th>
+<th><strong>Minimum</strong></th>
+<th><strong>Maximum</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Intercept</td>
+<td>2933</td>
+<td>10.92</td>
+<td>1.36</td>
+<td>4.45</td>
+<td>18.77</td>
+</tr>
+<tr class="even">
+<td>month</td>
+<td>2933</td>
+<td>0.03</td>
+<td>0.69</td>
+<td>-5.00</td>
+<td>7.10</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The mean Hgb concentration on the first month was 10.92 g/dl (ranging from 4.45 to 18.77)</li>
+<li>The mean slope was 0.03 (ranging from -5 to 7.1)</li>
+</ul>
+<aside class="notes">
+<p>A linear regression model between Hgb and time was fitted for each patient to explain within-subject variability. The mean Hgb concentration on the first month is 10.92 g/dl (ranging from 4.45 to 18.77) and the mean slope is 0.03 (ranging from -5 to 7.1)</p>
+<p>Note: this slide can be removed for the interest of time</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="two-stage-analysis-1" class="slide level2">
+<h2>Two-stage analysis</h2>
+<h3 id="stage-2-analysis">Stage-2 analysis</h3>
+<ul>
+<li>Effect of age on the intercept:</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 7%">
+<col style="width: 22%">
+<col style="width: 19%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Variable</strong></th>
+<th><strong>Label</strong></th>
+<th><strong>DF</strong></th>
+<th><strong>Parameter Estimate</strong></th>
+<th><strong>Standard Error</strong></th>
+<th><strong>T Value</strong></th>
+<th><strong>P-value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Intercept</td>
+<td>Intercept</td>
+<td>2931</td>
+<td>10.6090</td>
+<td>0.1077</td>
+<td>98.53</td>
+<td>&lt;0.0001</td>
+</tr>
+<tr class="even">
+<td>AGE</td>
+<td>Slope</td>
+<td>1</td>
+<td>0.00499</td>
+<td>0.00168</td>
+<td>2.97</td>
+<td>0.0030</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>A unit increase in age is associated with a slight increase (0.005 g/dl) in the baseline Hgb level.</li>
+</ul>
+<aside class="notes">
+<p>In this analysis we examined the effect of age on the trend of Hgb levels across months. The goal was to model the between-subject variability.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="two-stage-analysis-2" class="slide level2">
+<h2>Two-stage analysis</h2>
+<h3 id="stage-2-analysis-1">Stage-2 analysis</h3>
+<ul>
+<li>Effect of age on the slope:</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 7%">
+<col style="width: 22%">
+<col style="width: 19%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Variable</strong></th>
+<th><strong>Label</strong></th>
+<th><strong>DF</strong></th>
+<th><strong>Parameter Estimate</strong></th>
+<th><strong>Standard Error</strong></th>
+<th><strong>T Value</strong></th>
+<th><strong>P-value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Intercept</td>
+<td>Intercept</td>
+<td>2931</td>
+<td>0.1568</td>
+<td>0.05532</td>
+<td>2.83</td>
+<td>0.0046</td>
+</tr>
+<tr class="even">
+<td>AGE</td>
+<td>Slope</td>
+<td>1</td>
+<td>-0.00187</td>
+<td>0.000862</td>
+<td>-2.17</td>
+<td>0.0300</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>As age increases, the rate of change in Hgb level over time decreases slightly (~ 0.002 g/dl).</li>
+</ul>
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="linear-mixed-model-2" class="slide level2">
+<h2>Linear mixed model</h2>
+<h3 id="mean-structure-was-identical-to-the-multivariate-model">Mean structure was identical to the multivariate model</h3>
+<table>
+<colgroup>
+<col style="width: 22%">
+<col style="width: 28%">
+<col style="width: 9%">
+<col style="width: 28%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Effect</strong></th>
+<th><strong>Linear Mixed Model Estimate (SE)</strong></th>
+<th><strong>P-value</strong></th>
+<th><strong>Multivariate Model Estimate (SE)</strong></th>
+<th><strong>P-value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Intercept</strong></td>
+<td>10.6218 (0.0885)</td>
+<td>&lt;0.0001</td>
+<td>10.6123 (0.0884)</td>
+<td>&lt;0.0001</td>
+</tr>
+<tr class="even">
+<td><strong>EPO dose</strong></td>
+<td>0.0005 (0.0002)</td>
+<td>0.0046</td>
+<td>0.0005 (0.0002)</td>
+<td>0.0059</td>
+</tr>
+<tr class="odd">
+<td><strong>Age</strong></td>
+<td>0.0027 (0.0013)</td>
+<td>0.0421</td>
+<td>0.0028 (0.0013)</td>
+<td>0.0329</td>
+</tr>
+<tr class="even">
+<td><strong>Male</strong></td>
+<td>0.1008 (0.0393)</td>
+<td>0.0102</td>
+<td>0.1037 (0.0392)</td>
+<td>0.0083</td>
+</tr>
+<tr class="odd">
+<td><strong>Iron deficiency</strong></td>
+<td>0.1662 (0.0317)</td>
+<td>&lt;0.0001</td>
+<td>0.1682 (0.0318)</td>
+<td>&lt;0.0001</td>
+</tr>
+<tr class="even">
+<td><strong>Month</strong></td>
+<td>-0.0282 (0.0156)</td>
+<td>0.0706</td>
+<td>-0.0375 (0.0155)</td>
+<td>0.0154</td>
+</tr>
+<tr class="odd">
+<td><strong>EPO dose * month</strong></td>
+<td>0.0005 (0.0001)</td>
+<td>&lt;0.0001</td>
+<td>0.0006 (0.0001)</td>
+<td>&lt;0.0001</td>
+</tr>
+<tr class="even">
+<td><strong>Iron deficiency * month</strong></td>
+<td>-0.0433 (0.0182)</td>
+<td>0.0174</td>
+<td>-0.0471 (0.0184)</td>
+<td>0.0106</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>EPO dose, age, sex, iron, EPO dose * month, and iron * month were significant</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>We also performed the F-test for fixed effects and that gave us the same p-values as the wald test shown on the slide.</li>
+<li>Over all, Hgb decreases over time, though it’s not significant in LMM, but only in multivariate model.</li>
+<li>EPO increases Hgb over time</li>
+<li>Iron-deficient patients decreases Hgb over time</li>
+<li>Patients with higher EPO dose have higher baseline Hgb</li>
+<li>Older patients and male patients have higher baseline Hgb</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="linear-mixed-model-3" class="slide level2">
+<h2>Linear mixed model</h2>
+<h3 id="variance-components">Variance components</h3>
+<table>
+<colgroup>
+<col style="width: 49%">
+<col style="width: 21%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Effect</strong></th>
+<th><strong>Parameter</strong></th>
+<th><strong>Estimate (SE)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Covariance of</strong> <span class="math inline">\(b_i\)</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>&nbsp;&nbsp;&nbsp;var(<span class="math inline">\(b_{1i}\)</span>)</td>
+<td><span class="math inline">\(d_{11}\)</span></td>
+<td>0.6919 (0.0556)</td>
+</tr>
+<tr class="odd">
+<td><strong>Measurement error variance</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>&nbsp;&nbsp;&nbsp;var(<span class="math inline">\(\epsilon_{(1)ij}\)</span>)</td>
+<td><span class="math inline">\(\sigma^2\)</span></td>
+<td>0.2923 (0.0164)</td>
+</tr>
+<tr class="odd">
+<td><strong>Gaussian serial correlation</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>&nbsp;&nbsp;&nbsp;var(<span class="math inline">\(\epsilon_{(2)ij}\)</span>)</td>
+<td><span class="math inline">\(\tau^2\)</span></td>
+<td>1.9210 (0.1312)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The varaince of the random intercept was 0.69</li>
+<li>The measurement error variance was 0.29</li>
+<li>The Gaussian serial correlation variance was 1.92</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>We also performed the F-test for fixed effects and that gave us the same p-values as the wald test shown on the slide.</li>
+<li>Over all, Hgb decreases over time, though it’s not significant in LMM, but only in multivariate model.</li>
+<li>EPO increases Hgb over time</li>
+<li>Iron-deficient patients decreases Hgb over time</li>
+<li>Patients with higher EPO dose have higher baseline Hgb</li>
+<li>Older patients and male patients have higher baseline Hgb</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="linear-mixed-model-vs-two-stage-model" class="slide level2">
+<h2>Linear mixed model vs two-stage model</h2>
+<ul>
+<li><p>Random slope against random intercept: <img data-src="Results/Subject-specific.png"></p></li>
+<li><p>Two-stage model demonstrated a slightly downward trend between the random effects</p></li>
+<li><p>A strong positive linear relationship observed between the random effects in the LMM</p></li>
+</ul>
+<aside class="notes">
+<ul>
+<li>This marked differences could be attributed to the fact that the two-stage model does not take into account the correlation structure in the data; hence, do not use the full information of the data.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="conclusions" class="slide level2">
+<h2>Conclusions</h2>
+<ul>
+<li><p>EPO increases Hgb over time</p></li>
+<li><p>Iron-deficient patients decreases Hgb over time</p></li>
+<li><p>Patients with higher EPO dose have higher baseline Hgb</p></li>
+<li><p>Older patients and male patients have higher baseline Hgb</p></li>
+</ul>
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="recommendations" class="slide level2">
+<h2>Recommendations</h2>
+<ul>
+<li>To be discussed</li>
+</ul>
+<aside class="notes">
+
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1110,7 +1547,18 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
         }
         return false;
       }
-      const onCopySuccess = function(e) {
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1142,29 +1590,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
         }, 1000);
         // clear code selection
         e.clearSelection();
-      }
-      const getTextToCopy = function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-      }
-      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-        text: getTextToCopy
       });
-      clipboard.on('success', onCopySuccess);
-      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-        // For code content inside modals, clipBoardJS needs to be initialized with a container option
-        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-          text: getTextToCopy,
-          container: window.document.getElementById('quarto-embedded-source-code-modal')
-        });
-        clipboardModal.on('success', onCopySuccess);
-      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1172,7 +1598,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {
