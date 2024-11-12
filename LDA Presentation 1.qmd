@@ -37,7 +37,6 @@ Longitudinal Data Analysis Project 1
 
 ::: columns
 ::: {.column width="60%"}
-
 **To investigate:**
 
 -   The evolution of hemoglobin (Hgb) over time in hemodialysis patients
@@ -114,10 +113,9 @@ R squared meta-analysis
 ::: fragment
 #### Stage 1: Linear regression model for each subject separately
 
-Linear effect of time Hgb levels: 
+Linear effect of time Hgb levels:
 
 $$Y_{ij} = \beta_{1i} + \beta_{2i} t_{ij} + \epsilon_{ij}, \quad j = 0, \dots, 5$$
-
 :::
 :::
 
@@ -159,17 +157,12 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 \end{aligned}
 \end{equation}
 ```
-
-
 ::: fragment
 #### Step 2: Test serial correlation function in residual covariance structure using REML log-likelihood
-
 :::
 
 ::: fragment
-
 #### Step 3: Reduce random effect structure using Likelihood ratio test
-
 
 #### Step 4: Reduce mean structure using F-test
 
@@ -189,16 +182,14 @@ There exists both within-subject and between-subject variability in Hgb levels o
 
 ::: {.column width="5%"}
 :::
+
 ::: {.column width="60%"}
-
-
 ![](Results/individual_profile.png)
 :::
-
 :::
 
 ::: notes
-The patients have a different Hb at the start of the experiment and this also changes with time. 
+The patients have a different Hb at the start of the experiment and this also changes with time.
 :::
 
 ## Results
@@ -241,7 +232,7 @@ the correlation between measurements decreases slightly as two time points are f
 ::: {.column width="\"50%"}
 -   Analysis of increments:
 
-![](Results/Hb%20increment.png)
+![](Results/Hb_increment.png)
 :::
 
 ::: {.column width="50%"}
@@ -320,16 +311,15 @@ Now Luong will continue the presentation.
 
 ### Stage-1 analysis
 
-- Subject-specific linear regression model for patients with at least 2 measurements
+-   Subject-specific linear regression model for patients with at least 2 measurements
 
 | **Variable** | **N** | **Mean** | **Std Dev** | **Minimum** | **Maximum** |
-|--------------|-------|----------|--------------|-------------|-------------|
-| Intercept    | 2933  | 10.92    | 1.36         | 4.45        | 18.77       |
-| month        | 2933  | 0.03     | 0.69         | -5.00       | 7.10        |
+|--------------|-------|----------|-------------|-------------|-------------|
+| Intercept    | 2933  | 10.92    | 1.36        | 4.45        | 18.77       |
+| month        | 2933  | 0.03     | 0.69        | -5.00       | 7.10        |
 
 ::: notes
-A linear regression model between Hgb and time was fitted for each patient to explain within-subject variability (as Trang mentioned). 
-The mean Hgb concentration on the first month is 10.92 g/dl (ranging from 4.45 to 18.77) and the mean slope is 0.03 (ranging from -5 to 7.1)
+A linear regression model between Hgb and time was fitted for each patient to explain within-subject variability (as Trang mentioned). The mean Hgb concentration on the first month is 10.92 g/dl (ranging from 4.45 to 18.77) and the mean slope is 0.03 (ranging from -5 to 7.1)
 :::
 
 ## Two-stage analysis
@@ -339,107 +329,108 @@ The mean Hgb concentration on the first month is 10.92 g/dl (ranging from 4.45 t
 -   Effect of age on the intercept:
 
 | **Variable** | **Parameter Estimate** | **Standard Error** | **T Value** | **P-value** |
-|--------------|------------------------|--------------------|-------------|-------------|
-| Intercept    | 10.61                  | 0.108              | 98.53       | <0.0001     |
-| AGE          | 0.005                   | 0.002              | 2.97        | 0.003       |
+|--------------|-----------------|--------------|--------------|--------------|
+| Intercept    | 10.61                  | 0.108              | 98.53       | \<0.0001    |
+| AGE          | 0.005                  | 0.002              | 2.97        | 0.003       |
 
 -   Effect of age on the slope:
 
 | **Variable** | **Parameter Estimate** | **Standard Error** | **T Value** | **P-value** |
-|--------------|------------------------|--------------------|-------------|-------------|
-| Intercept    | 0.157                   | 0.0553              | 2.83        | 0.005      |
-| AGE          | -0.002                  | 0.0009              | -2.17       | 0.030       |
+|--------------|-----------------|--------------|--------------|--------------|
+| Intercept    | 0.157                  | 0.0553             | 2.83        | 0.005       |
+| AGE          | -0.002                 | 0.0009             | -2.17       | 0.030       |
 
 ::: notes
 In this analysis we examined the effect of age on the trend of Hgb levels across months. The goal was to model the between-subject variability (as Trang mentioned).
 
 A unit increase in age is associated with a slight increase (0.005 g/dl) in the baseline Hgb level.
 
-As age increases, the rate of change in Hgb level over time decreases slightly (~ 0.002 g/dl).
+As age increases, the rate of change in Hgb level over time decreases slightly (\~ 0.002 g/dl).
 
 All these effects are statistically significant.
 :::
 
-## Linear mixed model
+## Linear mixed model {.smaller .scrollable}
 
 ### Mean structure was identical to the multivariate model
 
 | **Effect**                   | **Linear Mixed Model Estimate (SE)** | **P-value** | **Multivariate Model Estimate (SE)** | **P-value** |
-|------------------------------|--------------------------------------|-------------|--------------------------------------|-------------|
-| **Intercept**                | 10.62 (0.1)                         | <0.0001     | 10.61 (0.1)                         | <0.0001     |
-| **EPO dose**                 | 0.0005 (0.0002)                     | 0.005       | 0.0005 (0.0002)                     | 0.006       |
-| **Age**                      | 0.0027 (0.001)                      | 0.04        | 0.0028 (0.001)                      | 0.03        |
-| **Male**                     | 0.10 (0.04)                         | 0.01        | 0.10 (0.04)                         | 0.008       |
-| **Iron deficiency**          | 0.17 (0.03)                         | <0.0001     | 0.17 (0.03)                         | <0.0001     |
-| **Month**                    | -0.028 (0.02)                       | 0.07        | -0.038 (0.02)                       | 0.02        |
-| **EPO dose * month**         | 0.0005 (0.0001)                     | <0.0001     | 0.0006 (0.0001)                     | <0.0001     |
-| **Iron deficiency * month**  | -0.043 (0.02)                       | 0.02        | -0.047 (0.02)                       | 0.01        |
-- EPO dose, age, sex, iron, EPO dose * month, and iron * month were significant
+|--------------|----------------|--------------|----------------|--------------|
+| **Intercept**                | 10.62 (0.1)                          | \<0.0001    | 10.61 (0.1)                          | \<0.0001    |
+| **EPO dose**                 | 0.0005 (0.0002)                      | 0.005       | 0.0005 (0.0002)                      | 0.006       |
+| **Age**                      | 0.0027 (0.001)                       | 0.04        | 0.0028 (0.001)                       | 0.03        |
+| **Male**                     | 0.10 (0.04)                          | 0.01        | 0.10 (0.04)                          | 0.008       |
+| **Iron deficiency**          | 0.17 (0.03)                          | \<0.0001    | 0.17 (0.03)                          | \<0.0001    |
+| **Month**                    | -0.028 (0.02)                        | 0.07        | -0.038 (0.02)                        | 0.02        |
+| **EPO dose \* month**        | 0.0005 (0.0001)                      | \<0.0001    | 0.0006 (0.0001)                      | \<0.0001    |
+| **Iron deficiency \* month** | -0.043 (0.02)                        | 0.02        | -0.047 (0.02)                        | 0.01        |
+
+-   EPO dose, age, sex, iron, EPO dose \* month, and iron \* month were significant
 
 ::: notes
-- We also performed the F-test for fixed effects and that gave us the same p-values as the wald test shown on the slide.
-- Over all, the mean Hgb concentration decreases over time, though it's not significant in LMM, but only in multivariate model.
-- EPO increases Hgb over time, counteract the decrease in Hgb over time.
-- Iron-deficient patients have higher baseline Hgb but there Hgb decreases over time
-- Patients with higher EPO dose have higher baseline Hgb
-- Older patients and male patients have higher baseline Hgb 
+-   We also performed the F-test for fixed effects and that gave us the same p-values as the wald test shown on the slide.
+-   Over all, the mean Hgb concentration decreases over time, though it's not significant in LMM, but only in multivariate model.
+-   EPO increases Hgb over time, counteract the decrease in Hgb over time.
+-   Iron-deficient patients have higher baseline Hgb but there Hgb decreases over time
+-   Patients with higher EPO dose have higher baseline Hgb
+-   Older patients and male patients have higher baseline Hgb
 :::
 
 ## Linear mixed model
 
 ### Variance components
 
-| **Effect**                        | **Parameter** | **Estimate (SE)**   |
-|-----------------------------------|---------------|---------------------|
-| **Covariance of** $b_i$           |               |                     |
-| &nbsp;&nbsp;&nbsp;var($b_{1i}$)   | $d_{11}$      | 0.69 (0.056)        |
-| **Measurement error variance**     |               |                     |
-| &nbsp;&nbsp;&nbsp;var($\epsilon_{(1)ij}$) | $\sigma^2$ | 0.29 (0.016)       |
-| **Gaussian serial correlation**    |               |                     |
-| &nbsp;&nbsp;&nbsp;var($\epsilon_{(2)ij}$) | $\tau^2$ | 1.9 (0.13)         |
+| **Effect**                      | **Parameter** | **Estimate (SE)** |
+|---------------------------------|---------------|-------------------|
+| **Covariance of** $b_i$         |               |                   |
+|    var($b_{1i}$)                | $d_{11}$      | 0.69 (0.056)      |
+| **Measurement error variance**  |               |                   |
+|    var($\epsilon_{(1)ij}$)      | $\sigma^2$    | 0.29 (0.016)      |
+| **Gaussian serial correlation** |               |                   |
+|    var($\epsilon_{(2)ij}$)      | $\tau^2$      | 1.9 (0.13)        |
 
 ::: notes
-- Our variance components included the random intercept, and the residual covariance structure that was break down into measurement error variance and Gaussian serial correlation variance.
-- The varaince of the random intercept was 0.69
-- The measurement error variance was 0.29
-- The Gaussian serial correlation variance was 1.92 
+-   Our variance components included the random intercept, and the residual covariance structure that was break down into measurement error variance and Gaussian serial correlation variance.
+-   The varaince of the random intercept was 0.69
+-   The measurement error variance was 0.29
+-   The Gaussian serial correlation variance was 1.92
 :::
 
 ## Linear mixed model vs two-stage model
 
-- Random slope against random intercept:
-![](Results/Subject-specific.png)
+-   Random slope against random intercept: ![](Results/Subject-specific.png)
 
 ::: notes
-- Two-stage model demonstrated a slightly downward trend between the random effects
-- A strong positive linear relationship observed between the random effects in the LMM
-- This marked differences could be attributed to the fact that the two-stage model does not take into account the correlation structure in the data; hence, do not use the full information of the data. 
+-   Two-stage model demonstrated a slightly downward trend between the random effects
+-   A strong positive linear relationship observed between the random effects in the LMM
+-   This marked differences could be attributed to the fact that the two-stage model does not take into account the correlation structure in the data; hence, do not use the full information of the data.
 :::
 
 ## Conclusions
 
-- The mean Hgb concentration decreases over time
+-   The mean Hgb concentration decreases over time
 
-- Higher EPO dose >>> higher Hgb over time
+-   Higher EPO dose \>\>\> higher Hgb over time
 
-- Iron-deficient patients >>> higher baseline Hgb, Hgb decreases over time
+-   Iron-deficient patients \>\>\> higher baseline Hgb, Hgb decreases over time
 
-- Higher EPO dose >>> higher baseline Hgb
+-   Higher EPO dose \>\>\> higher baseline Hgb
 
-- Older patients and male patients >>> higher baseline Hgb
+-   Older patients and male patients \>\>\> higher baseline Hgb
 
-- Linear mixed model vs multivariate model
+-   Linear mixed model vs multivariate model
 
 ::: notes
 Linear mixed model and multivariate model provided similar results, but the LMM had a broader usecase.
 :::
 
-## Thank you for your attention
+##  {background-image="Figures/bg2.jpg" visibility="uncounted"}
 
-<!-- ## Recommendations -->
+::: title
 
-<!-- - To be discussed -->
+\
+\
 
-<!-- ::: notes -->
+**Thank you for your attention!**
+:::
 
-<!-- ::: -->

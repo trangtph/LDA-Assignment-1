@@ -8,7 +8,7 @@
 <link href="LDA Presentation 1_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="LDA Presentation 1_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="LDA Presentation 1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.553">
+  <meta name="generator" content="quarto-1.5.57">
 
   <title>lda-presentation-1</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -357,8 +357,7 @@
 <p><img data-src="Figures/home-hemodialysis2.jpg" class="quarto-figure quarto-figure-right"></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="methods" class="slide level2">
 <h2>Methods</h2>
@@ -462,8 +461,7 @@ Y_{ij} &amp;= \beta_{0} + \beta_{1} \, \text{age}_{i} + \beta_{2} \, \text{sex}_
 <li><span class="math inline">\(b_{1i}\)</span>, <span class="math inline">\(b_{2i}\)</span> are independent and <span class="math inline">\(\sim N(0,D)\)</span></li>
 </ul>
 </div>
-</div>
-</div>
+</div></div>
 <aside class="notes">
 <p>First we model the linear relationship of each subject’s hemoglobin with time. Then we modeled the between-subject variability by examining the effect of age on the intercepts and slopes</p>
 <style type="text/css">
@@ -516,8 +514,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 
 </div><div class="column" style="width:60%;">
 <p><img data-src="Results/individual_profile.png"></p>
-</div>
-</div>
+</div></div>
 <aside class="notes">
 <p>The patients have a different Hb at the start of the experiment and this also changes with time.</p>
 <style type="text/css">
@@ -551,8 +548,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <li>Covariance structure</li>
 </ul>
 <p><img data-src="Results/corre-matrix-Hgb.png"></p>
-</div>
-</div>
+</div></div>
 <aside class="notes">
 <p>The mean Hgb level increases approximately linear over time.</p>
 <p>stable variance over time with an increase in standard error at each time point</p>
@@ -587,8 +583,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <li>No significant effect of sex on AUC</li>
 </ul></li>
 </ul>
-</div>
-</div>
+</div></div>
 <aside class="notes">
 <p>Majority of patients tended to have minor change in Hgb levels. Analysis of AIC suggested that Increase in age leads to increase in AUC. Disadvantages: only use partial information so not insightful</p>
 <style type="text/css">
@@ -609,7 +604,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <ul>
 <li>Reduce each term and perform F-test against the full model:</li>
 </ul>
-<table>
+<table class="caption-top">
 <thead>
 <tr class="header">
 <th>Reduction</th>
@@ -669,7 +664,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <section id="multivariate-model-2" class="slide level2">
 <h2>Multivariate model</h2>
 <h3 id="finding-appropriate-covariance-structure">Finding appropriate covariance structure</h3>
-<table style="width:100%;">
+<table class="caption-top" style="width:100%;">
 <colgroup>
 <col style="width: 16%">
 <col style="width: 16%">
@@ -759,7 +754,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <ul>
 <li>Effect estimates:</li>
 </ul>
-<table>
+<table class="caption-top">
 <thead>
 <tr class="header">
 <th>Effect</th>
@@ -840,12 +835,12 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <ul>
 <li>Subject-specific linear regression model for patients with at least 2 measurements</li>
 </ul>
-<table style="width:100%;">
+<table class="caption-top">
 <colgroup>
-<col style="width: 19%">
-<col style="width: 9%">
+<col style="width: 20%">
+<col style="width: 10%">
 <col style="width: 14%">
-<col style="width: 19%">
+<col style="width: 18%">
 <col style="width: 18%">
 <col style="width: 18%">
 </colgroup>
@@ -898,13 +893,13 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <ul>
 <li>Effect of age on the intercept:</li>
 </ul>
-<table>
+<table class="caption-top">
 <colgroup>
-<col style="width: 16%">
-<col style="width: 28%">
+<col style="width: 19%">
 <col style="width: 23%">
-<col style="width: 15%">
-<col style="width: 15%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 19%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -935,13 +930,13 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <ul>
 <li>Effect of age on the slope:</li>
 </ul>
-<table>
+<table class="caption-top">
 <colgroup>
-<col style="width: 16%">
-<col style="width: 28%">
+<col style="width: 19%">
 <col style="width: 23%">
-<col style="width: 15%">
-<col style="width: 15%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 19%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -986,16 +981,16 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
           display:block!important;
       }</style></aside>
 </section>
-<section id="linear-mixed-model-1" class="slide level2">
+<section id="linear-mixed-model-1" class="slide level2 smaller scrollable">
 <h2>Linear mixed model</h2>
 <h3 id="mean-structure-was-identical-to-the-multivariate-model">Mean structure was identical to the multivariate model</h3>
-<table>
+<table class="caption-top">
 <colgroup>
-<col style="width: 22%">
-<col style="width: 28%">
-<col style="width: 9%">
-<col style="width: 28%">
-<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 21%">
+<col style="width: 18%">
+<col style="width: 21%">
+<col style="width: 18%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1092,12 +1087,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <section id="linear-mixed-model-2" class="slide level2">
 <h2>Linear mixed model</h2>
 <h3 id="variance-components">Variance components</h3>
-<table>
-<colgroup>
-<col style="width: 49%">
-<col style="width: 21%">
-<col style="width: 29%">
-</colgroup>
+<table class="caption-top">
 <thead>
 <tr class="header">
 <th><strong>Effect</strong></th>
@@ -1204,12 +1194,14 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
           display:block!important;
       }</style></aside>
 </section>
-<section id="thank-you-for-your-attention" class="slide level2">
-<h2>Thank you for your attention</h2>
-<!-- ## Recommendations -->
-<!-- - To be discussed -->
-<!-- ::: notes -->
-<!-- ::: -->
+<section id="section-1" class="slide level2" data-background-image="Figures/bg2.jpg" data-visibility="uncounted">
+<h2></h2>
+<div class="title">
+<p><br>
+<br>
+</p>
+<p><strong>Thank you for your attention!</strong></p>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -1460,18 +1452,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1503,7 +1484,29 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1511,7 +1514,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {
