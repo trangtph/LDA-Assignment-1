@@ -392,13 +392,14 @@ All these effects are statistically significant.
 | **Effect**                        | **Parameter** | **Estimate (SE)**   |
 |-----------------------------------|---------------|---------------------|
 | **Covariance of** $b_i$           |               |                     |
-| &nbsp;&nbsp;&nbsp;var($b_{1i}$)   | $d_{11}$      | 0.6919 (0.0556)     |
+| &nbsp;&nbsp;&nbsp;var($b_{1i}$)   | $d_{11}$      | 0.69 (0.056)        |
 | **Measurement error variance**     |               |                     |
-| &nbsp;&nbsp;&nbsp;var($\epsilon_{(1)ij}$) | $\sigma^2$ | 0.2923 (0.0164)    |
+| &nbsp;&nbsp;&nbsp;var($\epsilon_{(1)ij}$) | $\sigma^2$ | 0.29 (0.016)       |
 | **Gaussian serial correlation**    |               |                     |
-| &nbsp;&nbsp;&nbsp;var($\epsilon_{(2)ij}$) | $\tau^2$ | 1.9210 (0.1312)    |
+| &nbsp;&nbsp;&nbsp;var($\epsilon_{(2)ij}$) | $\tau^2$ | 1.9 (0.13)         |
 
 ::: notes
+- Our variance components included the random intercept, and the residual covariance structure that was break down into measurement error variance and Gaussian serial correlation variance.
 - The varaince of the random intercept was 0.69
 - The measurement error variance was 0.29
 - The Gaussian serial correlation variance was 1.92 

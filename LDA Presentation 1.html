@@ -840,16 +840,12 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <ul>
 <li>Subject-specific linear regression model for patients with at least 2 measurements</li>
 </ul>
-<<<<<<< HEAD
 <table style="width:100%;">
-=======
-<table>
->>>>>>> 751f124473e12e5443533d78f5eae1d78dbcc9ee
 <colgroup>
-<col style="width: 20%">
-<col style="width: 10%">
+<col style="width: 19%">
+<col style="width: 9%">
 <col style="width: 14%">
-<col style="width: 18%">
+<col style="width: 19%">
 <col style="width: 18%">
 <col style="width: 18%">
 </colgroup>
@@ -884,10 +880,6 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 </table>
 <aside class="notes">
 <p>A linear regression model between Hgb and time was fitted for each patient to explain within-subject variability (as Trang mentioned). The mean Hgb concentration on the first month is 10.92 g/dl (ranging from 4.45 to 18.77) and the mean slope is 0.03 (ranging from -5 to 7.1)</p>
-<<<<<<< HEAD
-<p>Note: this slide can be removed for the interest of time</p>
-=======
->>>>>>> 751f124473e12e5443533d78f5eae1d78dbcc9ee
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1122,7 +1114,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <tr class="even">
 <td>&nbsp;&nbsp;&nbsp;var(<span class="math inline">\(b_{1i}\)</span>)</td>
 <td><span class="math inline">\(d_{11}\)</span></td>
-<td>0.6919 (0.0556)</td>
+<td>0.69 (0.056)</td>
 </tr>
 <tr class="odd">
 <td><strong>Measurement error variance</strong></td>
@@ -1132,7 +1124,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <tr class="even">
 <td>&nbsp;&nbsp;&nbsp;var(<span class="math inline">\(\epsilon_{(1)ij}\)</span>)</td>
 <td><span class="math inline">\(\sigma^2\)</span></td>
-<td>0.2923 (0.0164)</td>
+<td>0.29 (0.016)</td>
 </tr>
 <tr class="odd">
 <td><strong>Gaussian serial correlation</strong></td>
@@ -1142,12 +1134,13 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <tr class="even">
 <td>&nbsp;&nbsp;&nbsp;var(<span class="math inline">\(\epsilon_{(2)ij}\)</span>)</td>
 <td><span class="math inline">\(\tau^2\)</span></td>
-<td>1.9210 (0.1312)</td>
+<td>1.9 (0.13)</td>
 </tr>
 </tbody>
 </table>
 <aside class="notes">
 <ul>
+<li>Our variance components included the random intercept, and the residual covariance structure that was break down into measurement error variance and Gaussian serial correlation variance.</li>
 <li>The varaince of the random intercept was 0.69</li>
 <li>The measurement error variance was 0.29</li>
 <li>The Gaussian serial correlation variance was 1.92</li>
