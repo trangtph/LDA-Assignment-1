@@ -3,7 +3,7 @@
     "path": "~/Library/CloudStorage/OneDrive-UniversiteitUtrecht/Epi/UHasselt/3 Longitudinal Data Analysis/Assignments/Assignment 1/LDA Presentation 1.qmd",
     "project_path": "LDA Presentation 1.qmd",
     "type": "quarto_markdown",
-    "hash": "0",
+    "hash": "2919317332",
     "contents": "",
     "dirty": false,
     "created": 1731162599427.0,
@@ -15,18 +15,18 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "339,0",
-        "scrollLine": "322",
+        "cursorPosition": "275,50",
+        "scrollLine": "266",
         "docOutlineVisible": "1",
         "rmdVisualCollapsedChunks": "",
-        "rmdVisualModeLocation": "7440:10004.0908203125"
+        "rmdVisualModeLocation": "473:590"
     },
     "folds": "",
-    "lastKnownWriteTime": 1731337757,
+    "lastKnownWriteTime": 1731366133,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1731337757,
+    "last_content_update": 1731366133011,
     "read_only": false,
     "read_only_alternatives": []
 }

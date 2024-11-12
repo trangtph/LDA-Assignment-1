@@ -37,13 +37,12 @@ Longitudinal Data Analysis Project 1
 
 ::: columns
 ::: {.column width="60%"}
-::: {.callout-important icon="false"}
-## To investigate:
+
+**To investigate:**
 
 -   The evolution of hemoglobin (Hgb) over time in hemodialysis patients
 
 -   How this evolution is influenced by EPO dose, iron deficiency status, age, and sex
-:::
 :::
 
 ::: {.column width="5%"}
@@ -66,7 +65,7 @@ Longitudinal Data Analysis Project 1
 -   Unbalanced data: not all patients were follow the whole six months
 
 ::: notes
-Monthly Hgb measurements and EPO doses But the data is unbalanced.
+Longitudinal data on Monthly Hgb measurements and EPO doses over 6 months in hemodialysis patients. But the data is unbalanced.
 :::
 
 ## Methods
@@ -115,15 +114,10 @@ R squared meta-analysis
 ::: fragment
 #### Stage 1: Linear regression model for each subject separately
 
+Linear effect of time Hgb levels: 
+
 $$Y_{ij} = \beta_{1i} + \beta_{2i} t_{ij} + \epsilon_{ij}, \quad j = 0, \dots, 5$$
 
-where:
-
--   $Y_{ij}$: the hemoglobin measurement for subject $i$ at time $j$.
--   $\beta_{1i}$: intercept for subject $i$
--   $\beta_{2i}$: the slope for subject $i$, showing the rate of change in hemoglobin level per month.
--   $t_{ij}$: the month of observation, measured from 0 to 5.
--   $\epsilon_{ij}$: error term for subject $i$ at time $j$, $\epsilon_{ij} \sim N(0, \sigma^2)$
 :::
 :::
 
@@ -145,7 +139,7 @@ where:
 :::
 
 ::: notes
-First we model the linear relationship of each subject's hemoglobin with time Then we modeled the between-subject variability by examining the effect of age on the intercepts and slopes
+First we model the linear relationship of each subject's hemoglobin with time. Then we modeled the between-subject variability by examining the effect of age on the intercepts and slopes
 :::
 
 ## Methods
@@ -160,58 +154,51 @@ Four-stage model building process:
 \begin{equation}
 \begin{aligned}
 Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij} + \beta_5t_{ij} + \\
-(\beta_6Age_i + \beta_7Sex_i + \beta_7Dose_{ij} + \beta_8Iron_{ij})t_{ij} + \\
-(\beta_9Age_i + \beta_{10}Sex_i + \beta_{11}Iron_{ij})Dose_{ij} + \\
+(\beta_6Age_i + \beta_7Sex_i + \beta_7Dose_{ij} + \beta_8Iron_{ij})t_{ij} + (\beta_9Age_i + \beta_{10}Sex_i + \beta_{11}Iron_{ij})Dose_{ij} + \\
   b_{1i} + b_{2j}t_{ij} + \epsilon_{ij}
 \end{aligned}
 \end{equation}
 ```
--   $b_{1i}$, $b_{2i} \sim N(0,D)$
--   $\epsilon \sim N(0,\Sigma_i)$
+
 
 ::: fragment
-#### Step 2: Adding serial correlation function to residual covariance structure
+#### Step 2: Test serial correlation function in residual covariance structure using REML log-likelihood
 
--   Comprare models with Gaussian serial correlation, exponential serial correlation, and without serial correlation using REML log-likelihood
 :::
 
-## Methods
+::: fragment
 
-### Linear mixed model
+#### Step 3: Reduce random effect structure using Likelihood ratio test
 
-Four-stage model building process:
 
-#### Step 3: Reduce random effect structure
-
--   Compare model with both random intercept and slope for time with model with only intercept or only slope, using Likelihood ratio test
-
-#### Step 4: Reduce mean structure
+#### Step 4: Reduce mean structure using F-test
 
 -   Compare model from step 3 with models removing interaction effects one by one, using F-test
+:::
 
 ## Results
 
 ### Exploratory Data Analysis
 
 ::: columns
-::: {.column width="60%"}
+::: {.column width="35%"}
 -   Individual profiles
+
+There exists both within-subject and between-subject variability in Hgb levels over time
+:::
+
+::: {.column width="5%"}
+:::
+::: {.column width="60%"}
+
 
 ![](Results/individual_profile.png)
 :::
 
-::: {.column width="10%"}
-:::
-
-::: {.column width="30%"}
--   Model assuming a linear relationship between each patient's Hgb and time: $R^2_{meta} = 0.52$
--   Model assuming a quadratic relationship: $R^2_{meta} = 0.73$
--   F-test for addition of quadratic to linear relationship: p \<0.0001
-:::
 :::
 
 ::: notes
-The patients have a different Hb at the start of the experiment and this also changes with time. We modeled individual Hb over time and R squared and F_test suggested that a quadratic relationship with time may explain the data better than linear relationship
+The patients have a different Hb at the start of the experiment and this also changes with time. 
 :::
 
 ## Results
@@ -266,7 +253,7 @@ the correlation between measurements decreases slightly as two time points are f
 :::
 
 ::: notes
-Change of Hgb level from baseline to the last measured level varied dramatically. Majority of patients tended to have minor change in Hgb levels. Increase in age leads to increase in AUC. Disadvantages: only use partial information so not insightful
+Majority of patients tended to have minor change in Hgb levels. Analysis of AIC suggested that Increase in age leads to increase in AUC. Disadvantages: only use partial information so not insightful
 :::
 
 ## Multivariate model
@@ -343,8 +330,6 @@ Now Luong will continue the presentation.
 ::: notes
 A linear regression model between Hgb and time was fitted for each patient to explain within-subject variability (as Trang mentioned). 
 The mean Hgb concentration on the first month is 10.92 g/dl (ranging from 4.45 to 18.77) and the mean slope is 0.03 (ranging from -5 to 7.1)
-
-Note: this slide can be removed for the interest of time
 :::
 
 ## Two-stage analysis
@@ -403,7 +388,6 @@ All these effects are statistically significant.
 ## Linear mixed model
 
 ### Variance components
-
 
 | **Effect**                        | **Parameter** | **Estimate (SE)**   |
 |-----------------------------------|---------------|---------------------|

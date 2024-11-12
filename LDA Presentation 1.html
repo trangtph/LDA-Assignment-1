@@ -344,19 +344,11 @@
 <h2>Study objectives</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<div class="callout callout-important no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
 <p><strong>To investigate:</strong></p>
-</div>
-<div class="callout-content">
 <ul>
 <li><p>The evolution of hemoglobin (Hgb) over time in hemodialysis patients</p></li>
 <li><p>How this evolution is influenced by EPO dose, iron deficiency status, age, and sex</p></li>
 </ul>
-</div>
-</div>
-</div>
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:35%;">
@@ -382,7 +374,7 @@
 <li>Unbalanced data: not all patients were follow the whole six months</li>
 </ul>
 <aside class="notes">
-<p>Monthly Hgb measurements and EPO doses But the data is unbalanced.</p>
+<p>Longitudinal data on Monthly Hgb measurements and EPO doses over 6 months in hemodialysis patients. But the data is unbalanced.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -453,15 +445,8 @@ Y_{ij} &amp;= \beta_{0} + \beta_{1} \, \text{age}_{i} + \beta_{2} \, \text{sex}_
 <div class="fragment">
 <!-- -->
 <h4 id="stage-1-linear-regression-model-for-each-subject-separately">Stage 1: Linear regression model for each subject separately</h4>
+<p>Linear effect of time Hgb levels:</p>
 <p><span class="math display">\[Y_{ij} = \beta_{1i} + \beta_{2i} t_{ij} + \epsilon_{ij}, \quad j = 0, \dots, 5\]</span></p>
-<p>where:</p>
-<ul>
-<li><span class="math inline">\(Y_{ij}\)</span>: the hemoglobin measurement for subject <span class="math inline">\(i\)</span> at time <span class="math inline">\(j\)</span>.</li>
-<li><span class="math inline">\(\beta_{1i}\)</span>: intercept for subject <span class="math inline">\(i\)</span></li>
-<li><span class="math inline">\(\beta_{2i}\)</span>: the slope for subject <span class="math inline">\(i\)</span>, showing the rate of change in hemoglobin level per month.</li>
-<li><span class="math inline">\(t_{ij}\)</span>: the month of observation, measured from 0 to 5.</li>
-<li><span class="math inline">\(\epsilon_{ij}\)</span>: error term for subject <span class="math inline">\(i\)</span> at time <span class="math inline">\(j\)</span>, <span class="math inline">\(\epsilon_{ij} \sim N(0, \sigma^2)\)</span></li>
-</ul>
 </div>
 </div><div class="column" style="width:40%;">
 <div class="fragment">
@@ -480,7 +465,7 @@ Y_{ij} &amp;= \beta_{0} + \beta_{1} \, \text{age}_{i} + \beta_{2} \, \text{sex}_
 </div>
 </div>
 <aside class="notes">
-<p>First we model the linear relationship of each subject’s hemoglobin with time Then we modeled the between-subject variability by examining the effect of age on the intercepts and slopes</p>
+<p>First we model the linear relationship of each subject’s hemoglobin with time. Then we modeled the between-subject variability by examining the effect of age on the intercepts and slopes</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -501,57 +486,40 @@ Y_{ij} &amp;= \beta_{0} + \beta_{1} \, \text{age}_{i} + \beta_{2} \, \text{sex}_
 <span class="math display">\[\begin{equation}
 \begin{aligned}
 Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij} + \beta_5t_{ij} + \\
-(\beta_6Age_i + \beta_7Sex_i + \beta_7Dose_{ij} + \beta_8Iron_{ij})t_{ij} + \\
-(\beta_9Age_i + \beta_{10}Sex_i + \beta_{11}Iron_{ij})Dose_{ij} + \\
+(\beta_6Age_i + \beta_7Sex_i + \beta_7Dose_{ij} + \beta_8Iron_{ij})t_{ij} + (\beta_9Age_i + \beta_{10}Sex_i + \beta_{11}Iron_{ij})Dose_{ij} + \\
   b_{1i} + b_{2j}t_{ij} + \epsilon_{ij}
 \end{aligned}
 \end{equation}\]</span>
-<ul>
-<li><span class="math inline">\(b_{1i}\)</span>, <span class="math inline">\(b_{2i} \sim N(0,D)\)</span></li>
-<li><span class="math inline">\(\epsilon \sim N(0,\Sigma_i)\)</span></li>
-</ul>
 <div class="fragment">
 <!-- -->
-<h4 id="step-2-adding-serial-correlation-function-to-residual-covariance-structure">Step 2: Adding serial correlation function to residual covariance structure</h4>
-<ul>
-<li>Comprare models with Gaussian serial correlation, exponential serial correlation, and without serial correlation using REML log-likelihood</li>
-</ul>
+<h4 id="step-2-test-serial-correlation-function-in-residual-covariance-structure-using-reml-log-likelihood">Step 2: Test serial correlation function in residual covariance structure using REML log-likelihood</h4>
 </div>
-</section>
-<section id="methods-5" class="slide level2">
-<h2>Methods</h2>
-<h3 id="linear-mixed-model-1">Linear mixed model</h3>
-<p>Four-stage model building process:</p>
-<h4 id="step-3-reduce-random-effect-structure">Step 3: Reduce random effect structure</h4>
-<ul>
-<li>Compare model with both random intercept and slope for time with model with only intercept or only slope, using Likelihood ratio test</li>
-</ul>
-<h4 id="step-4-reduce-mean-structure">Step 4: Reduce mean structure</h4>
+<div class="fragment">
+<!-- -->
+<h4 id="step-3-reduce-random-effect-structure-using-likelihood-ratio-test">Step 3: Reduce random effect structure using Likelihood ratio test</h4>
+<h4 id="step-4-reduce-mean-structure-using-f-test">Step 4: Reduce mean structure using F-test</h4>
 <ul>
 <li>Compare model from step 3 with models removing interaction effects one by one, using F-test</li>
 </ul>
+</div>
 </section>
 <section id="results" class="slide level2">
 <h2>Results</h2>
 <h3 id="exploratory-data-analysis">Exploratory Data Analysis</h3>
 <div class="columns">
-<div class="column" style="width:60%;">
+<div class="column" style="width:35%;">
 <ul>
 <li>Individual profiles</li>
 </ul>
-<p><img data-src="Results/individual_profile.png"></p>
-</div><div class="column" style="width:10%;">
+<p>There exists both within-subject and between-subject variability in Hgb levels over time</p>
+</div><div class="column" style="width:5%;">
 
-</div><div class="column" style="width:30%;">
-<ul>
-<li>Model assuming a linear relationship between each patient’s Hgb and time: <span class="math inline">\(R^2_{meta} = 0.52\)</span></li>
-<li>Model assuming a quadratic relationship: <span class="math inline">\(R^2_{meta} = 0.73\)</span></li>
-<li>F-test for addition of quadratic to linear relationship: p &lt;0.0001</li>
-</ul>
+</div><div class="column" style="width:60%;">
+<p><img data-src="Results/individual_profile.png"></p>
 </div>
 </div>
 <aside class="notes">
-<p>The patients have a different Hb at the start of the experiment and this also changes with time. We modeled individual Hb over time and R squared and F_test suggested that a quadratic relationship with time may explain the data better than linear relationship</p>
+<p>The patients have a different Hb at the start of the experiment and this also changes with time.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -622,7 +590,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 </div>
 </div>
 <aside class="notes">
-<p>Change of Hgb level from baseline to the last measured level varied dramatically. Majority of patients tended to have minor change in Hgb levels. Increase in age leads to increase in AUC. Disadvantages: only use partial information so not insightful</p>
+<p>Majority of patients tended to have minor change in Hgb levels. Analysis of AIC suggested that Increase in age leads to increase in AUC. Disadvantages: only use partial information so not insightful</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -872,12 +840,16 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 <ul>
 <li>Subject-specific linear regression model for patients with at least 2 measurements</li>
 </ul>
+<<<<<<< HEAD
 <table style="width:100%;">
+=======
+<table>
+>>>>>>> 751f124473e12e5443533d78f5eae1d78dbcc9ee
 <colgroup>
-<col style="width: 19%">
-<col style="width: 9%">
+<col style="width: 20%">
+<col style="width: 10%">
 <col style="width: 14%">
-<col style="width: 19%">
+<col style="width: 18%">
 <col style="width: 18%">
 <col style="width: 18%">
 </colgroup>
@@ -912,7 +884,10 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
 </table>
 <aside class="notes">
 <p>A linear regression model between Hgb and time was fitted for each patient to explain within-subject variability (as Trang mentioned). The mean Hgb concentration on the first month is 10.92 g/dl (ranging from 4.45 to 18.77) and the mean slope is 0.03 (ranging from -5 to 7.1)</p>
+<<<<<<< HEAD
 <p>Note: this slide can be removed for the interest of time</p>
+=======
+>>>>>>> 751f124473e12e5443533d78f5eae1d78dbcc9ee
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1019,7 +994,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
           display:block!important;
       }</style></aside>
 </section>
-<section id="linear-mixed-model-2" class="slide level2">
+<section id="linear-mixed-model-1" class="slide level2">
 <h2>Linear mixed model</h2>
 <h3 id="mean-structure-was-identical-to-the-multivariate-model">Mean structure was identical to the multivariate model</h3>
 <table>
@@ -1122,7 +1097,7 @@ Y_i = \beta_0 + \beta_1Age_i + \beta_2Sex_i + \beta_3Dose_{ij} + \beta_4Iron_{ij
           display:block!important;
       }</style></aside>
 </section>
-<section id="linear-mixed-model-3" class="slide level2">
+<section id="linear-mixed-model-2" class="slide level2">
 <h2>Linear mixed model</h2>
 <h3 id="variance-components">Variance components</h3>
 <table>
